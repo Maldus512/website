@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="width: auto; padding-right: 16px;" class="content-column">
+    <div style="max-width:1040px;">
+        <div style="display: flex; flex-wrap: wrap-reverse; direction: row; padding-top: 16px;">
+            <h1 class="title" style="flex-grow: 1; margin-bottom: 12px;"> # {{ page.title }} </h1>
+            <div>{{ page.date }}</div>
+        </div>
+        <div style="font-style: italic; margin-bottom: 32px;">{{ page.description }}</div>
+        <div>
+        {{ page.content | safe }}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

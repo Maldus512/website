@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://maldus512.com/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/about/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/articles/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/articles/first/</loc>
+        <lastmod>2019-11-27</lastmod>
+    </url>
+    <url>
+        <loc>https://maldus512.com/articles/second/</loc>
+        <lastmod>2019-11-28</lastmod>
+    </url>
+    <url>
+        <loc>https://maldus512.com/projects/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/projects/c-watcher/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/tags/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/tags/tag1/</loc>
+    </url>
+    <url>
+        <loc>https://maldus512.com/tags/tag2/</loc>
+    </url>
+</urlset>

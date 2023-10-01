@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div style="width: auto; padding-right: 16px;" class="content-column">
+    <div style="max-width:1040px;">
+        <h1># Articles</h1>
+        {% for page in section.pages %}
+        <button class="content-card" style="display: flex; flex-direction: column; min-height: 140px;"
+            onclick="navigate_to('{{ page.permalink | safe }}')">
+            <div style="display: flex; flex-direction: row; justify-content: start; flex-wrap: wrap;">
+                <div style="flex-grow: 100; flex-direction: start;">
+                    <div style="bottom: 0px; top: 0px; position: relative; text-align: start;" class="text-date">{{
+                        page.date }}</div>
+                </div>
+                <div style="display: flex; flex-direction: row; justify-content: end;">
+                    {% for tag in page.taxonomies.tags %}
+                    <a class="tag-link" href="{{ get_taxonomy_url(kind= "tags" , name=tag) | safe }}">
+                        {{ tag }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            <h2 style="margin-top: 0px; text-align: left;">{{ page.title }}</h2>
+            <div style="margin-top: 0px; margin-bottom: 0px; text-align: left;">{{ page.description }}</div>
+            </a>
+            {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
