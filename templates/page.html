@@ -2,15 +2,23 @@
 
 {% block content %}
 
-<div style="width: auto; padding-right: 16px;" class="content-column">
-    <div style="max-width:1040px;">
+<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    <div style="flex-grow: 1; max-width: {{ reading_width }}; padding: 0px 16px 0px 16px;">
         <div style="display: flex; flex-wrap: wrap-reverse; direction: row; padding-top: 16px;">
-            <h1 class="title" style="flex-grow: 1; margin-bottom: 12px;"> # {{ page.title }} </h1>
-            <div>{{ page.date }}</div>
+            <div style="color: {{ text_color_faded }}; flex-grow: 1; margin-right: 32px;">{{ page.date | date(format="%d/%m/%Y") }}</div>
+            <div style="margin-bottom: 16px; display: flex; flex-direction: row; column-gap: 8px;">
+                {% for topic in page.taxonomies.topics %}
+                <a class="topic topic-link" href="{{ get_taxonomy_url(kind= "topics" , name=topic) | safe }}" style="
+                                ">
+                    {{ topic }}
+                </a>
+                {% endfor %}
+            </div>
         </div>
+        <h1 style="flex-grow: 1; margin-bottom: 12px; margin-top: 8px;"> # {{ page.title }} </h1>
         <div style="font-style: italic; margin-bottom: 32px;">{{ page.description }}</div>
         <div>
-        {{ page.content | safe }}
+            {{ page.content | safe }}
         </div>
     </div>
 </div>

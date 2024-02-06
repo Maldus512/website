@@ -3,28 +3,41 @@
 {% block content %}
 
 <div
-    style="display: flex; flex-direction: column; justify-content: top; align-items: center; padding: 96px;">
-    <img src="/images/maldus512.jpg" style="border-radius:50%" />
-    <h3 style="margin-bottom:16px; margin-top:48px;">Maldus512</h3>
-    <div style="text-align: center; max-width: 640px;">{{ page.content | safe }}</div>
-    <div style="padding : 32px; display: flex; width: 100%; max-width: 320px; justify-content: space-between;">
-        <button type="button" style="border-width: 0px; width:64px; height:64px;">
-            <a href="https://stackoverflow.com/users/4862613/maldus"><img style="max-width: 48px; max-height: 48px;"
-                    src="/icons/stackoverflow.svg"
-                    alt="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
-                    title="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
-                    class="icon" /></a>
-        </button>
-        <button type="button" style="border-width: 0px; width:64px; height:64px;">
-            <a href="https://github.com/Maldus512"><img style="max-width: 48px; max-height: 48px;"
-                    src="/icons/github.svg" alt="profile for Maldus at Github" title="profile for Maldus at Github"
-                    class="icon" /></a>
-        </button>
-        <button type="button" style="border-width: 0px; width:64px; height:64px;">
-            <a href="mailto:mattia512maldini@gmail.com"><img style="max-width: 48px; max-height: 48px;"
-                    src="/icons/email.svg" alt="send email to mattia512maldini@gmail.com"
-                    title="send email to mattia512maldini@gmail.com" class="icon" /></a>
-        </button>
+    style="width: 100%; display: flex; flex-direction: column; flex-grow: 1; align-items: center; justify-content: center;">
+    <div style="flex-grow: 1; max-width: {{ reading_width }}; padding: 0px 16px 0px 16px;">
+        <h1># About</h1>
+        <div
+            style="display: flex; flex-direction: column; justify-content: top; align-items: center; padding-top: 48px;">
+            <img src="/images/maldus512.jpg" style="border-radius:50%" />
+            <h3 style="margin-bottom:16px; margin-top:48px;">Maldus512</h3>
+            <div style="text-align: center; max-width: 640px;">{{ page.content | safe }}</div>
+            <div
+                style="margin : 32px 32px 48px 32px; display: flex; width: 100%; max-width: 320px; justify-content: space-between;">
+                <button type="button" style="border-width: 0px; width:64px; height:64px;">
+                    <a href="https://stackoverflow.com/users/4862613/maldus" target="_blank">
+                        <img style="max-width: 48px; max-height: 48px;" src="/icons/stackoverflow.svg"
+                            alt="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
+                            title="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
+                            class="icon" /></a>
+                </button>
+                <button type="button" style="border-width: 0px; width:64px; height:64px;">
+                    <a href="https://github.com/Maldus512" target="_blank">
+                        <img style="max-width: 48px; max-height: 48px;" src="/icons/github.svg"
+                            alt="profile for Maldus at Github" title="profile for Maldus at Github" class="icon" /></a>
+                </button>
+                <button type="button" style="border-width: 0px; width:64px; height:64px;">
+                    <a href="mailto:mattia512maldini@gmail.com" target="_blank">
+                        <img style="max-width: 48px; max-height: 48px;" src="/icons/email.svg"
+                            alt="send email to mattia512maldini@gmail.com"
+                            title="send email to mattia512maldini@gmail.com" class="icon" /></a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%; margin-bottom: 4px; margin-right: 8px;">
+        <div style="max-width: {{ reading_width }}; text-align:right; margin: auto; color: {{ text_color_faded }};">
+            Inspired by <a href="https://github.com/EdenEast/nightfox.nvim#nordfox" target="_blank">Nordfox</a>
+        </div>
     </div>
 </div>
 

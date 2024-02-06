@@ -1,11 +1,66 @@
-{% macro navigation_link(label, href) %}
-<div {% if current_path==href %} class="selected" {% endif %}
-    style="width: 100%; flex-direction: row; display: flex; justify-content: center;">
-    <div style="padding-top: 8px; padding-bottom: 8px; padding-left: 8px;">></div><a href="{{ href }}"
-        class="navigation-link"
-        style="font-size: larger; flex-grow: 1; display: flex; padding-bottom: 8px; padding-top: 8px; padding-left: 8px;">
+{% macro top_navigation_link(label, href, highlight_color) %}
+<a href="{{ href }}" class="navbar-link"
+    style="
+    {% if current_path==href %} background-color: {{ highlight_color }}; z-index: 1; {% endif %}
+    flex-direction: row; 
+    display: inline-flex; 
+    width: min-content; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img {% if current_path==href %} src="/icons/folder-open-solid.svg" {% else %} src="/icons/folder-solid.svg" {%
+        endif %} style="max-height: 16px; max-width: 16px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: large; display: flex; text-decoration: underline;">
         {{ label }}
-    </a>
-</div>
-{% endmacro navigation_link %}
+    </div>
+</a>
+{% endmacro top_navigation_link %}
 
+{% macro navbar_line(shift, bg_color) %}
+<div
+    style="position:absolute; bottom : {{ shift }}px; z-index: 0; width: 100%; background-color: {{ bg_color}}; height: 3px; margin-bottom:2px; overflow-x : scroll;">
+</div>
+{% endmacro %}
+
+{% macro article_card(title, description, topics, permalink, date, text_color_faded, tag_highlight_color="#000000", hightlighted_tag="") %}
+    <div style="position: relative;" class="article-card">
+        <a class="article-link" href="{{ permalink | safe }}"
+            style="position: relative; padding: 16px; display: flex; flex-direction: column; min-height: 120px;">
+            <div
+                style="bottom: 0px; top: 0px; margin-top:8px; margin-bottom: 8px; text-align: start; color: {{ text_color_faded }};">
+                {{ date | date(format="%d/%m/%Y") }}
+            </div>
+            <h2 style="margin-top: 0px; text-align: left; width: 60%;">{{ title }}</h2>
+            <div style="margin-top: 0px; margin-bottom: 0px; text-align: left; width: 80%;">{{ description }}</div>
+        </a>
+
+        <div style="
+            position: absolute; 
+            top: 16px; 
+            right: 0px; 
+            display: flex; 
+            flex-direction: row; 
+            column-gap: 8px;
+            row-gap: 4px;
+            justify-content: end; 
+            margin-right: 16px; 
+            pointer-events: none;
+            flex-wrap: wrap;
+            max-width: 40%;
+            ">
+            {% for topic in topics %}
+            <a 
+                class="topic" 
+                style="
+                {% if hightlighted_tag == topic %}
+                border-color: {{ tag_highlight_color }};
+                {% endif %}
+                "
+                href="{{ get_taxonomy_url(kind= "topics" , name=topic) | safe }}" >
+                {{ topic }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}

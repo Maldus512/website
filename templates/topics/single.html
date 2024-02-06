@@ -1,5 +1,3 @@
-{% import "macros.html" as macros %}
-
 {% extends "base.html" %}
 
 {% block content %}
@@ -8,17 +6,22 @@
     <div style="flex-grow: 1; max-width: {{ reading_width }}; padding: 0px 16px 0px 16px;">
         <div
             style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; margin-top: 32px; margin-bottom: 16px;">
-            <h1 style="margin: 0px; flex-grow: 100; margin-right: 32px; margin-bottom: 16px;"># Articles</h1>
+            <h1 style="margin: 0px; flex-grow: 100; margin-right: 32px; margin-bottom: 16px;">
+                # Articles about <span style="font-style: italic; color: {{ primary_color }}"> {{ term.name }} </span>
+            </h1>
             <div style="flex-grow: 1; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: end; column-gap: 16px; margin-bottom: 8px;">
                 {% set topics = get_taxonomy(kind= "topics") %}
                 <a href="{{ topics.permalink | safe }}" 
                    style="font-size: large;" >Topics</a>
+                {% set section = get_section(path="articles/_index.md") %}
+                <a href="{{ section.permalink | safe }}" 
+                   style="font-size: large;" >Articles</a>
             </div>
         </div>
 
-        {% for page in section.pages %}
+        {% for page in term.pages %}
         {{ macros::article_card(title=page.title, description=page.description, topics=page.taxonomies.topics,
-        permalink=page.permalink, date=page.date, text_color_faded=text_color_faded) }}
+        permalink=page.permalink, date=page.date, text_color_faded=text_color_faded, tag_highlight_color=tag_highlight_color, hightlighted_tag=term.name) }}
         {% endfor %}
 
     </div>

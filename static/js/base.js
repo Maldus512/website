@@ -1,59 +1,4 @@
 window.addEventListener('DOMContentLoaded', async () => {
-    let close_sidebar_btn_id = "close-sidebar-btn";
-    let open_sidebar_btn_id = "open-sidebar-btn";
-    let scaffold_open = false;
-
-    let close_sidebar = () => {
-        scaffold_open = false;
-
-        let element = document.getElementById("side-navbar");
-        element.style.transitionDuration = "0.5s";
-
-        window.setTimeout(() => {
-            let element = document.getElementById("side-navbar");
-            element.style.flexBasis = "0px";
-            element.style.width = "0px";
-            window.setTimeout(() => {
-                let element = document.getElementById("side-navbar");
-                element.style.transitionDuration = "0s";
-            }, 500);
-        });
-    };
-
-    let open_sidebar = () => {
-        scaffold_open = true;
-
-        let element = document.getElementById("side-navbar");
-        element.style.transitionDuration = "0.5s";
-
-        window.setTimeout(() => {
-            let element = document.getElementById("side-navbar");
-            element.style.flexBasis = "320px";
-            element.style.width = "320px";
-            window.setTimeout(() => {
-                let element = document.getElementById("side-navbar");
-                element.style.transitionDuration = "0s";
-            }, 500);
-        });
-    };
-
-    let is_scaffold_open = () => {
-        if (scaffold_open) {
-            return true;
-        }
-
-        let taglist = window.location.href.split("#")
-        if (taglist.length > 1) {
-            return taglist.slice(-1)[0] == "scaffold";
-        } else {
-            return false;
-        }
-    };
-
-    let should_open_scaffold = () => { // Do not open scaffold in small websites
-        return !window.matchMedia("(max-width: 800px)").matches && is_scaffold_open()
-    }
-
     let get = async (url) => {
         const CACHE_TIMEOUT = 60000;
         const now = new Date().getTime();
@@ -66,37 +11,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         localStorage.setItem(url, JSON.stringify({time: now, data: json}));
         return json;
     };
-
-    navigate_to = (path) => {
-        console.log(path);
-        if (should_open_scaffold()) {
-            document.location.href = path + "#scaffold";
-        } else {
-            document.location.href = path;
-        }
-        return false;
-    };
-
-
-    document.getElementById(close_sidebar_btn_id)
-        .addEventListener("click", close_sidebar);
-
-    document.getElementById(open_sidebar_btn_id)
-        .addEventListener("click",
-            open_sidebar);
-
-    if (is_scaffold_open()) {
-        let element = document.getElementById("side-navbar");
-        element.style.flexBasis = "320px";
-        element.style.width = "320px";
-    }
-
-    for (const link of document.querySelectorAll(".navigation-link")) {
-        link.onclick = () => {
-            navigate_to(link.href);
-            return false;
-        }
-    }
 
     const emojis = await get('https://api.github.com/emojis');
     const colors = await get('https://raw.githubusercontent.com/ozh/github-colors/master/colors.json');

@@ -1,49 +1,140 @@
 {% import "macros.html" as macros %}
+{% set font_stack = "Ubuntu, sans-serif" %}
+{% set bg_color = "#2e3440" %}
+{% set text_color = "#f0f0f0" %}
+{% set text_color_faded = "#a0a0a0" %}
+{% set primary_color = "#8baed1" %}
+{% set secondary_color = "#232831" %}
+{% set title_color = "#8cafd2" %}
+{% set tag_color = "#c9826b" %}
+{% set tag_highlight_color = "#ebcb8b" %}
+{% set highlight_color = "#444c5e" %}
+{% set reading_width = "640px" %}
+{% set screen_width_threshold = "800px" %}
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html style="min-height: 100%;" lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
     <meta charset="utf-8">
     <title>Maldus512</title>
-    <link rel="stylesheet" href="/theme.css">
+    {% block rss %}
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
+    {% endblock %}
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        a, div {
+            color: {{ text_color }};
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: {{ title_color }};
+        }
+
+        h1 {
+            margin-top:32px;
+            margin-bottom:32px;
+        }
+
+        button {
+            background-color: transparent;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        button:hover {
+            background-color: {{ highlight_color }};
+        }
+
+        .topic {
+            text-decoration: none;
+            background-color: {{ tag_color }};
+            border-width: 4px; 
+            border-style: solid; 
+            border-radius: 8px;
+            border-color: {{ tag_color }};
+            padding: 4px;
+            display: inline;
+            z-index: 1;
+            pointer-events: initial;
+        }
+
+        .topic-link:hover {
+            text-decoration: underline;
+        }
+
+        .article-card {
+            border: solid;
+            border-width: 2px;
+            margin-bottom: 32px;
+            text-decoration: none;
+            width: 100%;
+            overflow: hidden;
+
+            border-color: {{ highlight_color }};
+        }
+
+        .article-link {
+            text-decoration: none;
+        }
+
+        .article-link:hover {
+            background-color: {{ highlight_color }};
+        }
+
+        .svg-icon {
+            fill : {{ primary_color }};
+        }
+
+        @media screen and (max-width: {{ screen_width_threshold }} ) {
+            .navbar-link {
+                flex-grow: 1;
+            }
+        }
+
+        @media screen and (min-width: {{ screen_width_threshold }} ) {
+            .navbar-label {
+                flex-grow: 1;
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <div style="min-height:100vh; position: relative;">
+<body style="
+    font: 100% {{ font_stack }};
+    background-color: {{ bg_color }};
+    color: {{ text_color }};
+    margin: 0px;">
+    <div style="min-height:100vh; width: 100%; display: flex; flex-direction: column; justify-content: start;">
+        <!-- Navbar -->
+        <div style="position: relative; background-color: {{ secondary_color }};">
+            {{ macros::navbar_line(shift = 0, bg_color=bg_color) }}
+            {{ macros::navbar_line(shift = 42, bg_color=bg_color) }}
+            {{ macros::navbar_line(shift = 42*2, bg_color=bg_color) }}
+            {{ macros::navbar_line(shift = 42*3, bg_color=bg_color) }}
+            <div id="navbar-links" style="width: 100%; display: flex; flex-wrap: wrap-reverse; justify-content: start;">
+                {{ macros::top_navigation_link(label="Articles", href="/articles/", highlight_color=highlight_color) }}
+                {{ macros::top_navigation_link(label="Projects", href="/projects/", highlight_color=highlight_color) }}
+                {{ macros::top_navigation_link(label="About", href="/about/", highlight_color=highlight_color) }}
+                <!-- {{ macros::top_navigation_link(label="References", href="/references/", highlight_color=highlight_color) }} -->
+            </div>
+        </div>
+
         <!-- Content -->
-        <div>
+        <div style="padding-top: 8px; display: flex; flex-grow: 1; flex-direction: column;">
             {% block content %} {% endblock %}
         </div>
-
-        <!-- Navbar -->
-        <button type="button" id="open-sidebar-btn"
-            style="position:fixed; left: 16px; top: 16px; border-width: 0px; width:64px; height:64px;">
-            <img src="/icons/folder-solid.svg" style="max-height: 48px; max-width: 48px;" class="icon" />
-        </button>
-
-        <div style="width: 0px; flex-basis: 0px; display: flex; position:fixed; top: 0px; left: 0px; height: 100vh; overflow:hidden; white-space: nowrap; padding-left: 8px; padding-right: 0px;"
-            class="secondary-color" id="side-navbar">
-            <div
-                style="overflow: hidden; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 96px 8px 0px 32px;">
-                {{ macros::navigation_link(label="Articles", href="/articles/") }}
-                {{ macros::navigation_link(label="Projects", href="/projects/") }}
-                {{ macros::navigation_link(label="About", href="/about/") }}
-            </div>
-
-            <div style="width: 4px; height: 100%; margin-right: 2px; position: absolute; right: 0px; top: 0px;"
-                class="primary-color"></div>
-
-            <div style="position: absolute; left: 8px; bottom: 2px" class="text-color-faded">Powered by <a
-                    href="https://www.getzola.org/">Zola</a></div>
-            <button type="button" id="close-sidebar-btn"
-                style="position:absolute; left: 16px; top: 16px; border-width: 0px; width:64px; height:64px;">
-                <img src="/icons/folder-open-solid.svg" style="max-height: 48px; max-width: 48px;" class="icon" />
-            </button>
-        </div>
     </div>
-
     <script src="/js/base.js"></script>
 </body>
 

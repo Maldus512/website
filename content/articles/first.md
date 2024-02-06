@@ -3,7 +3,7 @@ title = "My first post"
 description = "A subtitle"
 date = 2019-11-27
 [taxonomies]
-tags = ["Tag1", "Tag2"]
+topics = ["Tag1", "Tag2", "Compilers", "Logic"]
 +++
 
 # Hello
