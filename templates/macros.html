@@ -1,6 +1,5 @@
 {% macro top_navigation_link(label, href, highlight_color) %}
-<a href="{{ href }}" class="navbar-link"
-    style="
+<a href="{{ href }}" class="navbar-link" style="
     {% if current_path==href %} background-color: {{ highlight_color }}; z-index: 1; {% endif %}
     flex-direction: row; 
     display: inline-flex; 
@@ -10,8 +9,8 @@
     justify-content: center; 
     align-items: center;">
     <img {% if current_path==href %} src="/icons/folder-open-solid.svg" {% else %} src="/icons/folder-solid.svg" {%
-        endif %} style="max-height: 16px; max-width: 16px; margin-right: 8px;" class="icon" />
-    <div class="navbar-label" style="font-size: large; display: flex; text-decoration: underline;">
+        endif %} style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex; text-decoration: underline;">
         {{ label }}
     </div>
 </a>
@@ -23,44 +22,37 @@
 </div>
 {% endmacro %}
 
-{% macro article_card(title, description, topics, permalink, date, text_color_faded, tag_highlight_color="#000000", hightlighted_tag="") %}
-    <div style="position: relative;" class="article-card">
-        <a class="article-link" href="{{ permalink | safe }}"
-            style="position: relative; padding: 16px; display: flex; flex-direction: column; min-height: 120px;">
-            <div
-                style="bottom: 0px; top: 0px; margin-top:8px; margin-bottom: 8px; text-align: start; color: {{ text_color_faded }};">
-                {{ date | date(format="%d/%m/%Y") }}
+{% macro article_card(title, description, topics, permalink, date, text_color_faded, tag_highlight_color="#000000",
+hightlighted_tag="") %}
+<div style="position: relative;" class="article-card">
+    <a class="article-link" href="{{ permalink | safe }}"
+        style="position: relative; padding: 16px; display: flex; flex-direction: column; min-height: 120px;">
+        <div style="position: relative; display: flex; flex-direction: row; flex-wrap: wrap-reverse;">
+            <div style="position: relative; display: flex; flex-direction: column; flex: 4">
+                <div
+                    style="bottom: 0px; top: 0px; margin-top:8px; margin-bottom: 8px; text-align: start; color: {{ text_color_faded }};">
+                    {{ date | date(format="%d/%m/%Y") }}
+                </div>
+                <h2 style="margin-top: 0px; text-align: left;">{{ title }}</h2>
+                <div style="margin-top: 0px; margin-bottom: 0px; text-align: left; width: 80%;">{{ description }}</div>
             </div>
-            <h2 style="margin-top: 0px; text-align: left; width: 60%;">{{ title }}</h2>
-            <div style="margin-top: 0px; margin-bottom: 0px; text-align: left; width: 80%;">{{ description }}</div>
-        </a>
 
-        <div style="
-            position: absolute; 
-            top: 16px; 
-            right: 0px; 
-            display: flex; 
-            flex-direction: row; 
-            column-gap: 8px;
-            row-gap: 4px;
-            justify-content: end; 
-            margin-right: 16px; 
-            pointer-events: none;
-            flex-wrap: wrap;
-            max-width: 40%;
-            ">
-            {% for topic in topics %}
-            <a 
-                class="topic" 
-                style="
-                {% if hightlighted_tag == topic %}
-                border-color: {{ tag_highlight_color }};
+            <div
+                style="display: flex; flex-direction: row; column-gap: 8px; row-gap: 4px; align-content: start;justify-content: end; margin-right: 16px; flex-wrap: wrap; flex: 2; margin-bottom: 8px;">
+                {% for topic in topics %}
+                <div class="topic" style=" align-self: flex-start;
+                {% if not hightlighted_tag or hightlighted_tag == topic %}
+                opacity: 1.0;
+                {% else %}
+                opacity: 0.2;
                 {% endif %}
-                "
-                href="{{ get_taxonomy_url(kind= "topics" , name=topic) | safe }}" >
-                {{ topic }}
-            </a>
-            {% endfor %}
+                " href="{{ get_taxonomy_url(kind= "topics" , name=topic) | safe }}">
+                    {{ topic }}
+                </div>
+                {% endfor %}
+            </div>
+
         </div>
-    </div>
+    </a>
+</div>
 {% endmacro %}

@@ -6,8 +6,8 @@
 {% set primary_color = "#8baed1" %}
 {% set secondary_color = "#232831" %}
 {% set title_color = "#8cafd2" %}
-{% set tag_color = "#c9826b" %}
-{% set tag_highlight_color = "#ebcb8b" %}
+{% set tag_color = "#bc6548" %}
+{% set tag_highlight_color = "#c57b62" %}
 {% set highlight_color = "#444c5e" %}
 {% set reading_width = "640px" %}
 {% set screen_width_threshold = "800px" %}
@@ -59,14 +59,13 @@
         .topic {
             text-decoration: none;
             background-color: {{ tag_color }};
-            border-width: 4px; 
-            border-style: solid; 
             border-radius: 8px;
-            border-color: {{ tag_color }};
-            padding: 4px;
-            display: inline;
-            z-index: 1;
-            pointer-events: initial;
+            padding: 8px;
+        }
+
+        .topic-link {
+            padding: 12px !important;
+            font-size: large;
         }
 
         .topic-link:hover {
@@ -88,8 +87,16 @@
             text-decoration: none;
         }
 
-        .article-link:hover {
+        .article-link:hover, .article-link:active {
             background-color: {{ highlight_color }};
+        }
+
+        .article-link:hover .topic{
+            background-color: {{ tag_highlight_color }};
+        }
+
+        .article-link:active .topic{
+            background-color: {{ tag_highlight_color }};
         }
 
         .svg-icon {
