@@ -1,11 +1,16 @@
 {% import "macros.html" as macros %}
 {% set font_stack = "Ubuntu, sans-serif" %}
+
 {% set bg_color = "#2e3440" %}
 {% set text_color = "#f0f0f0" %}
 {% set text_color_faded = "#a0a0a0" %}
 {% set primary_color = "#8baed1" %}
 {% set secondary_color = "#232831" %}
 {% set title_color = "#8cafd2" %}
+
+{% set light_bg_color = "#2e3440" %}
+{% set light_text_color = "#f0f0f0" %}
+
 {% set tag_color = "#bc6548" %}
 {% set tag_highlight_color = "#c57b62" %}
 {% set highlight_color = "#444c5e" %}
@@ -33,8 +38,8 @@
     <meta name="theme-color" content="#ffffff">
 
     <style>
-        a, div {
-            color: {{ text_color }};
+        a {
+            color: inherit;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -113,6 +118,10 @@
             .navbar-label {
                 flex-grow: 1;
             }
+
+            #article-page {
+                margin-top: -40px;
+            }
         }
     </style>
 </head>
@@ -129,17 +138,27 @@
             {{ macros::navbar_line(shift = 42, bg_color=bg_color) }}
             {{ macros::navbar_line(shift = 42*2, bg_color=bg_color) }}
             {{ macros::navbar_line(shift = 42*3, bg_color=bg_color) }}
-            <div id="navbar-links" style="width: 100%; display: flex; flex-wrap: wrap-reverse; justify-content: start;">
-                {{ macros::top_navigation_link(label="Articles", href="/articles/", highlight_color=highlight_color) }}
-                {{ macros::top_navigation_link(label="Projects", href="/projects/", highlight_color=highlight_color) }}
-                {{ macros::top_navigation_link(label="About", href="/about/", highlight_color=highlight_color) }}
-                <!-- {{ macros::top_navigation_link(label="References", href="/references/", highlight_color=highlight_color) }} -->
+
+            <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap-reverse; justify-content: space-between;">
+                <div id="navbar-links" style="flex-grow: 1; display: flex; flex-wrap: wrap-reverse; justify-content: start;">
+                    {{ macros::top_navigation_link(label="Articles", href="/articles/", highlight_color=highlight_color) }}
+                    {{ macros::top_navigation_link(label="Projects", href="/projects/", highlight_color=highlight_color) }}
+                    {{ macros::top_navigation_link(label="About", href="/about/", highlight_color=highlight_color) }}
+                    <!-- {{ macros::top_navigation_link(label="References", href="/references/", highlight_color=highlight_color) }} -->
+                </div>
             </div>
         </div>
 
         <!-- Content -->
-        <div style="padding-top: 8px; display: flex; flex-grow: 1; flex-direction: column;">
-            {% block content %} {% endblock %}
+        <div style="padding-top: 16px; display: flex; flex-grow: 1; flex-direction: column; align-items: center;">
+            <div id="theme-btn" style="display: none; cursor:pointer; position: absolute; right: 16px;">
+                <a style="display: flex; justify-content: end; align-items: center;">
+                    <img src="/icons/sun.svg" id="theme-img" style="max-height: 24px; max-width: 24px;" class="icon"/>
+                </a>
+            </div>
+            <div style="padding-top: 32px; flex-grow: 1; display: flex; flex-direction: column;">
+                {% block content %} {% endblock %}
+            </div>
         </div>
     </div>
     <script src="/js/base.js"></script>

@@ -1,4 +1,26 @@
 window.addEventListener('DOMContentLoaded', async () => {
+    let darkMode = true;
+
+    let themeBtn = document.getElementById("theme-btn");
+    if (themeBtn != null) {
+        themeBtn.style.display = "inline";
+        themeBtn.onclick = (_) => {
+            let themeImg = document.getElementById("theme-img");
+
+            if (darkMode) {
+                if (themeImg != null) {
+                    themeImg.src = "/icons/moon.svg";
+                }
+            } else {
+                if (themeImg != null) {
+                    themeImg.src = "/icons/sun.svg";
+                }
+            }
+
+            darkMode = !darkMode;
+        }
+    }
+
     let get = async (url) => {
         const CACHE_TIMEOUT = 60000;
         const now = new Date().getTime();
