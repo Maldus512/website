@@ -8,36 +8,61 @@
         <h1 style="margin-top: 0px;"># About</h1>
         <div
             style="display: flex; flex-direction: column; justify-content: top; align-items: center; padding-top: 48px;">
-            <img src="/images/maldus512.jpg" style="border-radius:50%" />
+            <img src="/images/maldus512.jpg" style="border-radius:50%; max-width: 100%;" />
             <h3 style="margin-bottom:16px; margin-top:48px;">Maldus512</h3>
             <div style="text-align: center; max-width: 640px;">{{ page.content | safe }}</div>
             <div
-                style="margin : 32px 32px 48px 32px; display: flex; width: 100%; max-width: 320px; justify-content: space-between;">
-                <button type="button" style="border-width: 0px; width:64px; height:64px;">
-                    <a href="https://stackoverflow.com/users/4862613/maldus" target="_blank">
-                        <img style="max-width: 48px; max-height: 48px;" src="/icons/stackoverflow.svg"
-                            alt="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
-                            title="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
-                            class="icon" /></a>
+                style="margin : 32px 32px 48px 32px; display: flex; width: 100%; max-width: 480px; justify-content: space-around; flex-wrap: wrap; justify-items: center;">
+                <button type="button" class="dark-hover" style="border-width: 0px;">
+                    <div style="width:64px; height:64px; display: flex; align-items: center; justify-content: center;">
+                        <a href="https://stackoverflow.com/users/4862613/maldus" target="_blank">
+                            <img style="max-width: 48px; max-height: 48px;" src="/icons/icon-dark-stackoverflow.svg"
+                                alt="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers"
+                                title="profile for Maldus at Stack Overflow, Q&amp;A for professional and enthusiast programmers" />
+                    </div></a>
                 </button>
-                <button type="button" style="border-width: 0px; width:64px; height:64px;">
-                    <a href="https://github.com/Maldus512" target="_blank">
-                        <img style="max-width: 48px; max-height: 48px;" src="/icons/github.svg"
-                            alt="profile for Maldus at Github" title="profile for Maldus at Github" class="icon" /></a>
+                <button type="button" class="dark-hover" style="border-width: 0px;">
+                    <div style="width:64px; height:64px; display: flex; align-items: center; justify-content: center;">
+                        <a href="https://github.com/Maldus512" target="_blank">
+                            <img style="max-width: 48px; max-height: 48px;" src="/icons/icon-dark-github.svg"
+                                alt="profile for Maldus at Github" title="profile for Maldus at Github" />
+                    </div></a>
                 </button>
-                <button type="button" style="border-width: 0px; width:64px; height:64px;">
+                <button type="button" class="dark-hover" style="border-width: 0px;">
                     <a href="mailto:mattia512maldini@gmail.com" target="_blank">
-                        <img style="max-width: 48px; max-height: 48px;" src="/icons/email.svg"
-                            alt="send email to mattia512maldini@gmail.com"
-                            title="send email to mattia512maldini@gmail.com" class="icon" /></a>
+                        <div
+                            style="width:64px; height:64px; display: flex; align-items: center; justify-content: center;">
+                            <img style="max-width: 48px; max-height: 48px;" src="/icons/icon-dark-email.svg"
+                                alt="send email to mattia512maldini@gmail.com"
+                                title="send email to mattia512maldini@gmail.com" />
+                        </div>
+                    </a>
+                </button>
+                <button type="button" class="dark-hover" style="border-width: 0px;">
+                    <a href="https://ko-fi.com/S6S0VYS3I" target="_blank">
+                        <div
+                            style="width:64px; height:64px; display: flex; align-items: center; justify-content: center;">
+                            <img style="max-width: 48px; max-height: 48px;" src="/icons/icon-dark-ko-fi.svg"
+                                alt="Buy Me a Coffee at ko-fi.com" title="Buy Me a Coffee at ko-fi.com" />
+                        </div>
+                    </a>
+                </button>
+                <button type="button" class="dark-hover" style="border-width: 0px;">
+                    <a href="rss.xml" target="_blank">
+                        <div
+                            style="width:64px; height:64px; display: flex; align-items: center; justify-content: center;">
+                            <img style="max-width: 48px; max-height: 48px;" src="/icons/icon-dark-rss.svg"
+                                alt="RSS feed" title="RSS feed" />
+                        </div>
+                    </a>
                 </button>
             </div>
         </div>
     </div>
-    <div style="width: 100%; margin-bottom: 4px; margin-right: 8px;">
-        <div style="max-width: {{ reading_width }}; text-align:right; margin: auto; color: {{ text_color_faded }};">
-            Inspired by <a href="https://github.com/EdenEast/nightfox.nvim#nordfox" target="_blank">Nordfox</a>
-        </div>
+    <div style="width: 100%;max-width: {{ reading_width }}; color: {{ text_color_faded }}; margin-bottom: 4px; margin-right: 8px; display:flex; flex-direction:row; justify-content: space-around; flex-wrap: wrap;">
+        <div style="padding-left: 16px; padding-right:16px; padding-bottom: 8px;"> Inspired by <a href="https://github.com/EdenEast/nightfox.nvim#nordfox" target="_blank">Nightfox</a> </div>
+        <div style="padding-left: 16px; padding-right:16px; padding-bottom: 8px;"> Copyright © 2020-2024 Mattia Maldini. </div>
+        <div style="padding-left: 16px; padding-right:16px; padding-bottom: 8px;"> Except where otherwise noted, content on this site is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License.</a> </div>
     </div>
 </div>
 

@@ -1,5 +1,5 @@
 +++
 title = "Projects"
 template = "projects.html"
-slug = "projects"
+#slug = "projects"
 +++

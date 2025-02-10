@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="14"
+   height="8.0226564"
+   viewBox="0 0 0.35 0.20056641"
+   fill="none"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="icon-angle-down.svg"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   inkscape:export-filename="icon-angle-down.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="8.7716026"
+     inkscape:cx="141.87829"
+     inkscape:cy="278.34138"
+     inkscape:window-width="1912"
+     inkscape:window-height="1038"
+     inkscape:window-x="2"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="0.34999999"
+       height="0.20056641"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
+  <path
+     d="M 0.34060821,0.05092239 0.19096658,0.19343705 C 0.16542,0.21776735 0.13348722,0.17397515 0.15903355,0.14964485 l 0.14964111,-0.1425159 c 0.0255465,-0.02433 0.0574799,0.01946349 0.0319336,0.04379344 z"
+     fill="#000000"
+     id="path1"
+     style="fill:#5a657d;fill-opacity:1;stroke-width:0.0266622" />
+  <path
+     d="m 0.04132469,0.00712895 0.14964189,0.14251586 c 0.0255465,0.0243305 -0.006387,0.0681225 -0.0319331,0.0437925 L 0.00939193,0.05092239 c -0.02554649,-0.02433 0.00638662,-0.06812319 0.03193276,-0.04379344 z"
+     fill="#000000"
+     id="path2"
+     style="fill:#5a657d;fill-opacity:1;stroke-width:0.0266622" />
+</svg>

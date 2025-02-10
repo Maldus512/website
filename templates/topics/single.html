@@ -7,7 +7,7 @@
         <div
             style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center; column-gap: 32px; margin-bottom: 16px;">
             <h1 style="margin: 0px; flex-grow: 100; margin-right: 32px; margin-bottom: 16px;">
-                # Articles about <span style="font-style: italic; color: {{ primary_color }}"> {{ term.name }} </span>
+                # Articles about <span style="font-style: italic; color: {{ dark_primary_color }}"> {{ term.name }} </span>
             </h1>
             <div style="flex-grow: 1; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: start; column-gap: 16px; margin-bottom: 8px;">
                 {% set topics = get_taxonomy(kind= "topics") %}

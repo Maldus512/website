@@ -3,7 +3,9 @@ base_url = "https://maldus512.com"
 
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = true
-generate_feed = true
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+author = "Maldus512"
 
 taxonomies = [ {name = "topics", feed = true, render = true } ]
 

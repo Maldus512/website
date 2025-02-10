@@ -8,7 +8,7 @@
 
         <div style="margin-top: 32px; padding-top: 16px; display: flex; flex-direction: row; row-gap: 16px; column-gap: 32px; flex-wrap: wrap; justify-content: space-around;">
         {% for topic in terms %}
-            <a class="topic topic-link" style="padding: 8px; font-size: larger;" href="{{ topic.permalink }}">
+            <a class="topic topic-link button-link" style="padding: 8px; font-size: larger;" href="{{ topic.permalink }}">
                 {{ topic.name }} [{{ topic.page_count }}]
             </a>
         {% endfor %}

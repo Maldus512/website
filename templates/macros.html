@@ -1,31 +1,32 @@
-{% macro top_navigation_link(label, href, highlight_color) %}
-<a href="{{ href }}" class="navbar-link" style="
-    {% if current_path==href %} background-color: {{ highlight_color }}; z-index: 1; {% endif %}
+{% macro top_navigation_link(label, href, highlight_class) %}
+<a href="{{ href }}" class="button-link navbar-link {% if current_path==href %} {{ highlight_class }} {% endif %}" style="
+    {% if current_path==href %}; z-index: 1; {% endif %}
     flex-direction: row; 
     display: inline-flex; 
-    width: min-content; 
+    min-width: 120px; 
     padding: 8px 20px 12px 20px; 
     overflow: visible; 
     justify-content: center; 
     align-items: center;">
-    <img {% if current_path==href %} src="/icons/folder-open-solid.svg" {% else %} src="/icons/folder-solid.svg" {%
+    <img {% if current_path==href %} src="/icons/icon-dark-folder-open.svg" {% else %} src="/icons/icon-dark-folder.svg" {%
         endif %} style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
-    <div class="navbar-label" style="font-size: larger; display: flex; text-decoration: underline;">
+    <div class="navbar-label" style="font-size: larger; display: flex;">
         {{ label }}
     </div>
 </a>
 {% endmacro top_navigation_link %}
 
-{% macro navbar_line(shift, bg_color) %}
+{% macro navbar_line(shift, class) %}
 <div
-    style="position:absolute; bottom : {{ shift }}px; z-index: 0; width: 100%; background-color: {{ bg_color}}; height: 3px; margin-bottom:2px; overflow-x : scroll;">
+    class={{ class }}
+    style="position:absolute; bottom : {{ shift }}px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : scroll;">
 </div>
 {% endmacro %}
 
 {% macro article_card(title, description, topics, permalink, date, text_color_faded, tag_highlight_color="#000000",
 hightlighted_tag="") %}
-<div style="position: relative;" class="article-card">
-    <a class="article-link" href="{{ permalink | safe }}"
+<div style="position: relative;" class="article-card dark-border">
+    <a class="article-link dark-hover" href="{{ permalink | safe }}"
         style="position: relative; padding: 16px; display: flex; flex-direction: column; min-height: 120px;">
         <div style="position: relative; display: flex; flex-direction: row; flex-wrap: wrap-reverse;">
             <div style="position: relative; display: flex; flex-direction: column; flex: 4">
@@ -38,9 +39,9 @@ hightlighted_tag="") %}
             </div>
 
             <div
-                style="display: flex; flex-direction: row; column-gap: 8px; row-gap: 4px; align-content: start;justify-content: end; margin-right: 16px; flex-wrap: wrap; flex: 2; margin-bottom: 8px;">
+                style="display: flex; flex-direction: row; column-gap: 8px; row-gap: 4px; align-content: start;justify-content: end; margin-right: 0px; flex-wrap: wrap; flex: 2; margin-bottom: 8px;">
                 {% for topic in topics %}
-                <div class="topic" style=" align-self: flex-start;
+                <div class="topic" style=" align-self: flex-start; padding:6px;
                 {% if not hightlighted_tag or hightlighted_tag == topic %}
                 opacity: 1.0;
                 {% else %}

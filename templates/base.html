@@ -1,21 +1,29 @@
 {% import "macros.html" as macros %}
 {% set font_stack = "Ubuntu, sans-serif" %}
 
-{% set bg_color = "#2e3440" %}
-{% set text_color = "#f0f0f0" %}
-{% set text_color_faded = "#a0a0a0" %}
-{% set primary_color = "#8baed1" %}
-{% set secondary_color = "#232831" %}
-{% set title_color = "#8cafd2" %}
+{% set dark_bg_color = "#2e3440" %}
+{% set dark_text_color = "#f0f0f0" %}
+{% set dark_primary_color = "#8baed1" %}
+{% set dark_secondary_color = "#232831" %}
+{% set dark_title_color = "#8cafd2" %}
+{% set dark_highlight_color = "#444c5e" %}
 
-{% set light_bg_color = "#2e3440" %}
-{% set light_text_color = "#f0f0f0" %}
+{% set text_color_faded = "#a0a0a0" %}
+
+{% set light_bg_color = "#f6f2ee" %}
+{% set light_text_color = "#3d2b5a" %}
+{% set light_title_color = "#223d90" %}
+{% set light_primary_color = "#2848a9" %}
+{% set light_secondary_color = "#e4dcd4" %}
+{% set light_highlight_color = "#e7d2be" %}
 
 {% set tag_color = "#bc6548" %}
 {% set tag_highlight_color = "#c57b62" %}
-{% set highlight_color = "#444c5e" %}
-{% set reading_width = "640px" %}
-{% set screen_width_threshold = "800px" %}
+{% set reading_width = "680px" %}
+{% set screen_width_threshold_medium = "800px" %}
+{% set screen_width_threshold_large = "1280px" %}
+{% set screen_width_threshold_xlarge = "1400px" %}
+{% set screen_width_threshold_huge = "1700px" %}
 
 
 <!DOCTYPE html>
@@ -43,22 +51,21 @@
         }
 
         h1, h2, h3, h4, h5, h6 {
-            color: {{ title_color }};
+            color: {{ dark_title_color }};
         }
 
         h1 {
-            margin-top:32px;
             margin-bottom:32px;
         }
 
-        button {
-            background-color: transparent;
-            cursor: pointer;
-            padding: 8px;
+        a:hover {
+           cursor: pointer;
         }
 
-        button:hover {
-            background-color: {{ highlight_color }};
+
+        button, .button {
+            background-color: transparent;
+            cursor: pointer;
         }
 
         .topic {
@@ -69,12 +76,21 @@
         }
 
         .topic-link {
-            padding: 12px !important;
             font-size: large;
+            padding: 12px !important;
         }
 
-        .topic-link:hover {
+        .button-link {
+            text-decoration: none;
+        }
+
+        .button-link:hover {
             text-decoration: underline;
+            text-shadow:1px 0px 0px;
+        }
+
+        .ui-link:hover {
+            text-shadow:1px 0px 0px;
         }
 
         .article-card {
@@ -84,16 +100,10 @@
             text-decoration: none;
             width: 100%;
             overflow: hidden;
-
-            border-color: {{ highlight_color }};
         }
 
         .article-link {
             text-decoration: none;
-        }
-
-        .article-link:hover, .article-link:active {
-            background-color: {{ highlight_color }};
         }
 
         .article-link:hover .topic{
@@ -104,21 +114,100 @@
             background-color: {{ tag_highlight_color }};
         }
 
-        .svg-icon {
-            fill : {{ primary_color }};
+        .dark-bg {
+            background-color: {{ dark_bg_color }};
         }
 
-        @media screen and (max-width: {{ screen_width_threshold }} ) {
+        .dark-scrollbar {
+            background-color: {{ dark_title_color }};
+        }
+
+        .dark-fg {
+            color: {{ dark_text_color }};
+        }
+
+        h1.dark-fg, h2.dark-fg, h3.dark-fg, h4.dark-fg, h5.dark-fg, h6.dark-fg {
+            color: {{ dark_title_color }};
+        }
+
+        .dark-secondary-bg {
+            background-color: {{ dark_secondary_color }};
+        }
+
+        .dark-border {
+            border-color: {{ dark_highlight_color }};
+        }
+
+        .dark-highlight, .dark-hover:hover, .dark-hover:active, .dark-button:hover {
+            background-color: {{ dark_highlight_color }};
+        }
+
+        .light-bg {
+            background-color: {{ light_bg_color }};
+        }
+
+        .light-scrollbar {
+            background-color: {{ light_title_color }};
+        }
+
+        .light-fg {
+            color: {{ light_text_color }};
+        }
+
+        h1.light-fg, h2.light-fg, h3.light-fg, h4.light-fg, h5.light-fg, h6.light-fg {
+            color: {{ light_title_color }};
+        }
+
+        .light-secondary-bg {
+            background-color: {{ light_secondary_color }};
+        }
+
+        .light-border {
+            border-color: {{ light_highlight_color }};
+        }
+
+        .light-highlight, .light-hover:hover, .light-hover:active, .light-button:hover {
+            background-color: {{ light_highlight_color }};
+        }
+
+        .inherit-bg {
+            background-color: inherit;
+        }
+
+
+        @media screen and (max-width: {{ screen_width_threshold_xlarge }} ) {
+            #article-index {
+                margin-left: 0%;
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (min-width: {{ screen_width_threshold_xlarge }} ) {
+            #article-index {
+                margin-left: 5%;
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (max-width: {{ screen_width_threshold_large }} ) {
+            #article-index {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: {{ screen_width_threshold_large }} ) {
+            #article-index {
+                display: initial;
+            }
+        }
+
+        @media screen and (max-width: {{ screen_width_threshold_medium }} ) {
             .navbar-link {
                 flex-grow: 1;
             }
         }
 
-        @media screen and (min-width: {{ screen_width_threshold }} ) {
-            .navbar-label {
-                flex-grow: 1;
-            }
-
+        @media screen and (min-width: {{ screen_width_threshold_medium }} ) {
             #article-page {
                 margin-top: -40px;
             }
@@ -126,25 +215,25 @@
     </style>
 </head>
 
-<body style="
+<body 
+    class="dark-bg dark-fg"
+    style="
     font: 100% {{ font_stack }};
-    background-color: {{ bg_color }};
-    color: {{ text_color }};
     margin: 0px;">
     <div style="min-height:100vh; width: 100%; display: flex; flex-direction: column; justify-content: start;">
         <!-- Navbar -->
-        <div style="position: relative; background-color: {{ secondary_color }};">
-            {{ macros::navbar_line(shift = 0, bg_color=bg_color) }}
-            {{ macros::navbar_line(shift = 42, bg_color=bg_color) }}
-            {{ macros::navbar_line(shift = 42*2, bg_color=bg_color) }}
-            {{ macros::navbar_line(shift = 42*3, bg_color=bg_color) }}
+        <div style="position: relative;" class="dark-secondary-bg">
+            {{ macros::navbar_line(shift = 0, class="dark-bg") }}
+            {{ macros::navbar_line(shift = 42, class="dark-bg") }}
+            {{ macros::navbar_line(shift = 42*2, class="dark-bg") }}
+            {{ macros::navbar_line(shift = 42*3, class="dark-bg") }}
 
             <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap-reverse; justify-content: space-between;">
                 <div id="navbar-links" style="flex-grow: 1; display: flex; flex-wrap: wrap-reverse; justify-content: start;">
-                    {{ macros::top_navigation_link(label="Articles", href="/articles/", highlight_color=highlight_color) }}
-                    {{ macros::top_navigation_link(label="Projects", href="/projects/", highlight_color=highlight_color) }}
-                    {{ macros::top_navigation_link(label="About", href="/about/", highlight_color=highlight_color) }}
-                    <!-- {{ macros::top_navigation_link(label="References", href="/references/", highlight_color=highlight_color) }} -->
+                    {{ macros::top_navigation_link(label="Articles", href="/articles/", highlight_class="dark-highlight") }}
+                    {{ macros::top_navigation_link(label="Projects", href="/projects/", highlight_class="dark-highlight") }}
+                    {{ macros::top_navigation_link(label="Talks", href="/talks/", highlight_class="dark-highlight") }}
+                    {{ macros::top_navigation_link(label="About", href="/about/", highlight_class="dark-highlight") }}
                 </div>
             </div>
         </div>
@@ -153,7 +242,7 @@
         <div style="padding-top: 16px; display: flex; flex-grow: 1; flex-direction: column; align-items: center;">
             <div id="theme-btn" style="display: none; cursor:pointer; position: absolute; right: 16px;">
                 <a style="display: flex; justify-content: end; align-items: center;">
-                    <img src="/icons/sun.svg" id="theme-img" style="max-height: 24px; max-width: 24px;" class="icon"/>
+                    <img src="/icons/icon-dark-theme.svg" id="theme-img" style="max-height: 24px; max-width: 24px;"/>
                 </a>
             </div>
             <div style="padding-top: 32px; flex-grow: 1; display: flex; flex-direction: column;">

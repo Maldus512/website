@@ -1,6 +1,6 @@
 +++
 title = "About"
 template = "about.html"
-slug = "about"
+#slug = "about"
 +++
 Programming language ~~nerd~~ enthusiast, computer science graduate, embedded software developer, maker wannabe.

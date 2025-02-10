@@ -1,24 +1,71 @@
+let isLightMode = () => {
+    let theme = localStorage.getItem("theme")
+    if (theme == null || theme == "light") {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+let updateTheme = () => {
+    let replaceClass = (from, to) => {
+        for (const element of document.querySelectorAll("." + from)) {
+            element.classList.remove(from);
+            element.classList.add(to);
+        }
+    };
+
+    let replaceImgSource = (from, to) => {
+        for (const element of document.querySelectorAll("img")) {
+            element.src = element.src.replace(from, to)
+        }
+    };
+
+    if (isLightMode()) {
+        replaceClass("light-bg", "dark-bg");
+        replaceClass("light-secondary-bg", "dark-secondary-bg");
+        replaceClass("light-fg", "dark-fg");
+        replaceClass("light-border", "dark-border");
+        replaceClass("light-hover", "dark-hover");
+        replaceClass("light-highlight", "dark-highlight");
+        replaceImgSource("icon-light", "icon-dark");
+    } else {
+        replaceClass("dark-bg", "light-bg");
+        replaceClass("dark-secondary-bg", "light-secondary-bg");
+        replaceClass("dark-fg", "light-fg");
+        replaceClass("dark-border", "light-border");
+        replaceClass("dark-hover", "light-hover");
+        replaceClass("dark-highlight", "light-highlight");
+        replaceImgSource("icon-dark", "icon-light");
+    }
+}
+
+window.onscroll = function() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("scroll-indicator-bar").style.width = scrolled + "%";
+} 
+
 window.addEventListener('DOMContentLoaded', async () => {
-    let darkMode = true;
+    for (const element of document.querySelectorAll("h1, h2, h3, h4, h5")) {
+        element.classList.add("dark-fg")
+    }
 
     let themeBtn = document.getElementById("theme-btn");
     if (themeBtn != null) {
         themeBtn.style.display = "inline";
+
         themeBtn.onclick = (_) => {
-            let themeImg = document.getElementById("theme-img");
-
-            if (darkMode) {
-                if (themeImg != null) {
-                    themeImg.src = "/icons/moon.svg";
-                }
+            if (isLightMode()) {
+                localStorage.setItem("theme", "dark");
             } else {
-                if (themeImg != null) {
-                    themeImg.src = "/icons/sun.svg";
-                }
+                localStorage.setItem("theme", "light");
             }
-
-            darkMode = !darkMode;
+            updateTheme();
         }
+
+        updateTheme();
     }
 
     let get = async (url) => {

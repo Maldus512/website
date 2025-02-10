@@ -2,13 +2,33 @@
 
 {% block content %}
 
-<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;" id="article-page">
+<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; flex-grow:1;" id="article-page">
+    <div style="position:fixed; left: 0px; top:10%;" id="article-index">
+    {% if page.toc %}
+    <ul style="list-style-image: url('/icons/icon-angle-down.svg');">
+        {% for h1 in page.toc %}
+            <li>
+                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="{{ h1.permalink | safe }}">{{ h1.title }}</a></h3>
+                {% if h1.children %}
+                <ul style="list-style: none outside none; padding-left:4px;" class="dark-fg">
+                        {% for h2 in h1.children %}
+                            <li>
+                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="{{ h2.permalink | safe }}">{{ h2.title }}</a></h3>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
     <div style="flex-grow: 1; max-width: {{ reading_width }}; padding: 0px 16px 0px 16px;">
         <div style="display: flex; flex-wrap: wrap-reverse; justify-content: space-between; align-items: center; row-gap: 16px; flex-direction: row; padding-top: 16px;">
             <div style="color: {{ text_color_faded }}; margin-right: 32px;">{{ page.date | date(format="%d/%m/%Y") }}</div>
             <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: end; row-gap: 16px; column-gap: 16px;">
                 {% for topic in page.taxonomies.topics %}
-                <a class="topic topic-link" href="{{ get_taxonomy_url(kind= "topics" , name=topic) | safe }}" style="
+                <a class="topic topic-link button-link" href="{{ get_taxonomy_url(kind= "topics" , name=topic) | safe }}" style="
                                 ">
                     {{ topic }}
                 </a>
@@ -17,10 +37,16 @@
         </div>
         <h1 style="flex-grow: 1; margin-bottom: 16px; margin-top: 32px;"> # {{ page.title }} </h1>
         <div style="font-style: italic; margin-bottom: 32px;">{{ page.description }}</div>
-        <div>
+        <div style="line-height: 1.5;">
             {{ page.content | safe }}
         </div>
     </div>
+</div>
+
+<div style="position:fixed; left:0px; bottom:0px; z-index:1; width:100%;">
+  <div style="height: 6px;" class="dark-secondary-bg">
+    <div id="scroll-indicator-bar" class="dark-scrollbar" style="height: 100%; width:0%;"></div>
+  </div>
 </div>
 
 {% endblock content %}
