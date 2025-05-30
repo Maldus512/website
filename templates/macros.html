@@ -1,6 +1,6 @@
 {% macro top_navigation_link(label, href, highlight_class) %}
-<a href="{{ href }}" class="button-link navbar-link {% if current_path==href %} {{ highlight_class }} {% endif %}" style="
-    {% if current_path==href %}; z-index: 1; {% endif %}
+<a href="{{ href }}" class="button-link navbar-link {% if current_path and current_path==href %} {{ highlight_class }} {% endif %}" style="
+    {% if current_path and current_path==href %}; z-index: 1; {% endif %}
     flex-direction: row; 
     display: inline-flex; 
     min-width: 120px; 
@@ -8,7 +8,7 @@
     overflow: visible; 
     justify-content: center; 
     align-items: center;">
-    <img {% if current_path==href %} src="/icons/icon-dark-folder-open.svg" {% else %} src="/icons/icon-dark-folder.svg" {%
+    <img {% if current_path and current_path==href %} src="/icons/icon-dark-folder-open.svg" {% else %} src="/icons/icon-dark-folder.svg" {%
         endif %} style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
     <div class="navbar-label" style="font-size: larger; display: flex;">
         {{ label }}
@@ -19,7 +19,7 @@
 {% macro navbar_line(shift, class) %}
 <div
     class={{ class }}
-    style="position:absolute; bottom : {{ shift }}px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : scroll;">
+    style="position:absolute; bottom : {{ shift }}px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
 </div>
 {% endmacro %}
 
