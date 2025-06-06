@@ -1,0 +1,475 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html style="min-height: 100%;" lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <meta charset="utf-8">
+    <title>Maldus512</title>
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://maldus512.github.io/rss.xml">
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        a {
+            color: inherit;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #8cafd2;
+        }
+
+        h1 {
+            margin-bottom:32px;
+        }
+
+        a:hover {
+           cursor: pointer;
+        }
+
+
+        button, .button {
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .topic {
+            text-decoration: none;
+            background-color: #bc6548;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .topic-link {
+            font-size: large;
+            padding: 12px !important;
+        }
+
+        .button-link {
+            text-decoration: none;
+        }
+
+        .button-link:hover {
+            text-decoration: underline;
+            text-shadow:1px 0px 0px;
+        }
+
+        .ui-link:hover {
+            text-shadow:1px 0px 0px;
+        }
+
+        .article-card {
+            border: solid;
+            border-width: 2px;
+            margin-bottom: 32px;
+            text-decoration: none;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .article-link {
+            text-decoration: none;
+        }
+
+        .article-link:hover .topic{
+            background-color: #c57b62;
+        }
+
+        .article-link:active .topic{
+            background-color: #c57b62;
+        }
+
+        .dark-bg {
+            background-color: #2e3440;
+        }
+
+        .dark-scrollbar {
+            background-color: #8cafd2;
+        }
+
+        .dark-fg {
+            color: #f0f0f0;
+        }
+
+        h1.dark-fg, h2.dark-fg, h3.dark-fg, h4.dark-fg, h5.dark-fg, h6.dark-fg {
+            color: #8cafd2;
+        }
+
+        .dark-secondary-bg {
+            background-color: #232831;
+        }
+
+        .dark-border {
+            border-color: #444c5e;
+        }
+
+        .dark-highlight, .dark-hover:hover, .dark-hover:active, .dark-button:hover {
+            background-color: #444c5e;
+        }
+
+        .light-bg {
+            background-color: #f6f2ee;
+        }
+
+        .light-scrollbar {
+            background-color: #223d90;
+        }
+
+        .light-fg {
+            color: #3d2b5a;
+        }
+
+        h1.light-fg, h2.light-fg, h3.light-fg, h4.light-fg, h5.light-fg, h6.light-fg {
+            color: #223d90;
+        }
+
+        .light-secondary-bg {
+            background-color: #e4dcd4;
+        }
+
+        .light-border {
+            border-color: #e7d2be;
+        }
+
+        .light-highlight, .light-hover:hover, .light-hover:active, .light-button:hover {
+            background-color: #e7d2be;
+        }
+
+        .inherit-bg {
+            background-color: inherit;
+        }
+
+
+        @media screen and (max-width: 1400px ) {
+            #article-index {
+                margin-left: 0%;
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (min-width: 1400px ) {
+            #article-index {
+                margin-left: 32px;
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (max-width: 1280px ) {
+            #article-index {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 1280px ) {
+            #article-index {
+                display: initial;
+            }
+        }
+
+        @media screen and (max-width: 800px ) {
+            .navbar-link {
+                flex-grow: 1;
+            }
+        }
+
+        @media screen and (min-width: 800px ) {
+            #article-page {
+                margin-top: -40px;
+            }
+        }
+
+        /* Article style */
+        blockquote {
+            text-align: right;
+            font-style: italic;
+            border-style: solid;
+            border-width: 1px 4px 1px 1px;
+            margin-right: 16px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            padding: 4px 16px;
+        }
+
+        blockquote p {
+            margin-top:2px;
+            margin-bottom:2px;
+        }
+
+        pre {
+            padding: 16px;
+            margin: 32px 16px 32px 0px;
+            white-space: pre-wrap;       /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            font-size: 110%;
+        }
+
+        .article img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 32px;
+        }
+
+        .article code {
+            background-color:#2b303b;
+            color:#c0c5ce;
+            padding:2px 4px;
+            font-size: 110%;
+        }
+
+        .article h2 {
+            margin-top: 48px;
+            margin-bottom: 16px;
+        }
+
+        .article h3 {
+            margin-top: 32px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body 
+    class="dark-bg dark-fg"
+    style="
+    font: 100% Ubuntu, sans-serif;
+    margin: 0px;">
+    <div style="min-height:100vh; width: 100%; display: flex; flex-direction: column; justify-content: start;">
+        <!-- Navbar -->
+        <div style="position: relative;" class="dark-secondary-bg">
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 0px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 42px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 84px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 126px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+
+            <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap-reverse; justify-content: space-between;">
+                <div id="navbar-links" style="flex-grow: 1; display: flex; flex-wrap: wrap-reverse; justify-content: start;">
+                    
+<a href="&#x2F;articles&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        Articles
+    </div>
+</a>
+
+                    
+<a href="&#x2F;projects&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        Projects
+    </div>
+</a>
+
+                    
+<a href="&#x2F;talks&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        Talks
+    </div>
+</a>
+
+                    
+<a href="&#x2F;about&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        About
+    </div>
+</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div style="padding-top: 16px; display: flex; flex-grow: 1; flex-direction: column; align-items: center; padding-left:24px; padding-right:24px;">
+            <div id="theme-btn" style="display: none; cursor:pointer; position: absolute; right: 16px;">
+                <a style="display: flex; justify-content: end; align-items: center;">
+                    <img src="/icons/icon-dark-theme.svg" id="theme-img" style="max-height: 24px; max-width: 24px;"/>
+                </a>
+            </div>
+            <div style="padding-top: 32px; flex-grow: 1; display: flex; flex-direction: column; width: 100%;">
+                
+
+<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    <div style="flex-grow: 1; max-width: 720px; padding: 0px 16px 0px 16px;">
+        <div
+            style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center; column-gap: 32px; margin-bottom: 16px;">
+            <h1 style="margin: 0px; flex-grow: 100; margin-right: 32px; margin-bottom: 16px;">
+                # Articles about <span style="font-style: italic; color: #8baed1"> flutter </span>
+            </h1>
+            <div style="flex-grow: 1; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: start; column-gap: 16px; margin-bottom: 8px;">
+                
+                <a href="https://maldus512.github.io/topics/" 
+                   style="font-size: large;" >Topics</a>
+                
+                <a href="https://maldus512.github.io/articles/" 
+                   style="font-size: large;" >Articles</a>
+            </div>
+        </div>
+
+        
+        
+<div style="position: relative;" class="article-card dark-border">
+    <a class="article-link dark-hover" href="https://maldus512.github.io/articles/flutter-elm-lvgl/"
+        style="position: relative; padding: 16px; display: flex; flex-direction: column; min-height: 120px;">
+        <div style="position: relative; display: flex; flex-direction: row; flex-wrap: wrap-reverse;">
+            <div style="position: relative; display: flex; flex-direction: column; flex: 4">
+                <div
+                    style="bottom: 0px; top: 0px; margin-top:8px; margin-bottom: 8px; text-align: start; color: #a0a0a0;">
+                    27&#x2F;05&#x2F;2025
+                </div>
+                <h2 style="margin-top: 0px; text-align: left;">Flutter, Elm and LVGL: a Three Way Comparison</h2>
+                <div style="margin-top: 0px; margin-bottom: 0px; text-align: left; width: 80%;"></div>
+            </div>
+
+            <div
+                style="display: flex; flex-direction: row; column-gap: 8px; row-gap: 4px; align-content: start;justify-content: end; margin-right: 0px; flex-wrap: wrap; flex: 2; margin-bottom: 8px;">
+                
+                <div class="topic" style=" align-self: flex-start; padding:6px;
+                
+                opacity: 1.0;
+                
+                " href="https://maldus512.github.io/topics/flutter/">
+                    flutter
+                </div>
+                
+                <div class="topic" style=" align-self: flex-start; padding:6px;
+                
+                opacity: 0.2;
+                
+                " href="https://maldus512.github.io/topics/elm/">
+                    elm
+                </div>
+                
+                <div class="topic" style=" align-self: flex-start; padding:6px;
+                
+                opacity: 0.2;
+                
+                " href="https://maldus512.github.io/topics/lvgl/">
+                    lvgl
+                </div>
+                
+                <div class="topic" style=" align-self: flex-start; padding:6px;
+                
+                opacity: 0.2;
+                
+                " href="https://maldus512.github.io/topics/rant/">
+                    rant
+                </div>
+                
+                <div class="topic" style=" align-self: flex-start; padding:6px;
+                
+                opacity: 0.2;
+                
+                " href="https://maldus512.github.io/topics/ui/">
+                    ui
+                </div>
+                
+            </div>
+
+        </div>
+    </a>
+</div>
+
+        
+
+    </div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/js/base.js"></script>
+</body>
+
+</html>
