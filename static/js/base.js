@@ -22,6 +22,7 @@ let updateTheme = () => {
     };
 
     if (isLightMode()) {
+        replaceClass("light-active", "dark-active");
         replaceClass("light-bg", "dark-bg");
         replaceClass("light-secondary-bg", "dark-secondary-bg");
         replaceClass("light-fg", "dark-fg");
@@ -30,6 +31,7 @@ let updateTheme = () => {
         replaceClass("light-highlight", "dark-highlight");
         replaceImgSource("icon-light", "icon-dark");
     } else {
+        replaceClass("dark-active", "light-active");
         replaceClass("dark-bg", "light-bg");
         replaceClass("dark-secondary-bg", "light-secondary-bg");
         replaceClass("dark-fg", "light-fg");
@@ -40,12 +42,18 @@ let updateTheme = () => {
     }
 }
 
-window.onscroll = function() {
-  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  var scrolled = (winScroll / height) * 100;
-  document.getElementById("scroll-indicator-bar").style.width = scrolled + "%";
-} 
+window.onscroll = function () {
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrolled = (winScroll / height) * 100;
+    document.getElementById("scroll-indicator-bar").style.width = scrolled + "%";
+
+    if (winScroll == 0) {
+        const tocLinks = document.querySelectorAll('#article-index :is(h1, h2, h3, h4)');
+        tocLinks.forEach(link => link.classList.remove('light-active'));
+        tocLinks.forEach(link => link.classList.remove('dark-active'));
+    }
+}
 
 window.addEventListener('DOMContentLoaded', async () => {
     for (const element of document.querySelectorAll("h1, h2, h3, h4, h5")) {
@@ -120,4 +128,36 @@ window.addEventListener('DOMContentLoaded', async () => {
             `;
         }
     }
+
+    // Table of contents animation
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -60% 0px', // triggers earlier
+        threshold: 0
+    };
+
+    const tocLinks = document.querySelectorAll('#article-index :is(h1, h2, h3, h4)');
+    const sectionHeaders = document.querySelectorAll('#article :is(h1, h2, h3)');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            const tocLink = document.querySelector(`#article-index-${id}`);
+
+            if (entry.isIntersecting) {
+                console.log(tocLink);
+
+                tocLinks.forEach(link => link.classList.remove('light-active'));
+                tocLinks.forEach(link => link.classList.remove('dark-active'));
+
+                if (!isLightMode()) {
+                    tocLink?.classList.add('light-active');
+                } else {
+                    tocLink?.classList.add('dark-active');
+                }
+            }
+        });
+    }, observerOptions);
+
+    sectionHeaders.forEach(header => observer.observe(header));
 });

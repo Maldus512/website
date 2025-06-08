@@ -2,18 +2,19 @@
 
 {% block content %}
 
-<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; flex-grow:1;" id="article-page">
+<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; flex-grow:1; margin-bottom: 10%" id="article-page">
     <div style="position:fixed; left: 0px; top:10%;" id="article-index">
     {% if page.toc %}
-    <ul style="list-style-image: url('/icons/icon-angle-down.svg');">
+    <ul style="list-style: none;">
+        <li><h2 id="page-title"><a class="ui-link" href="#navbar">{{ page.title }}</a></h2></li>
         {% for h1 in page.toc %}
-            <li>
-                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="{{ h1.permalink | safe }}">{{ h1.title }}</a></h3>
+            <li style = "margin-left: 8px;">
+                <h3 id="article-index-{{h1.id}}" style="margin:0px; padding-bottom: 12px; padding-top: 12px; padding-left: 4px;"># <a class="ui-link" href="{{ h1.permalink | safe }}">{{ h1.title }}</a></h3>
                 {% if h1.children %}
                 <ul style="list-style: none outside none; padding-left:4px;" class="dark-fg">
                         {% for h2 in h1.children %}
                             <li>
-                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="{{ h2.permalink | safe }}">{{ h2.title }}</a></h3>
+                                <h4 id="article-index-{{h2.id}}" style="margin-top:0px; margin-bottom: 0px; padding-bottom: 8px; padding-top: 8px; padding-left: 4px; font-size: medium;">## <a class="ui-link" href="{{ h2.permalink | safe }}">{{ h2.title }}</a></h3>
                             </li>
                         {% endfor %}
                     </ul>
@@ -35,9 +36,9 @@
                 {% endfor %}
             </div>
         </div>
-        <h1 style="flex-grow: 1; margin-bottom: 16px; margin-top: 32px;"> # {{ page.title }} </h1>
+        <h1 style="flex-grow: 1; margin-bottom: 16px; margin-top: 32px;"> {{ page.title }} </h1>
         <div style="font-style: italic; margin-bottom: 32px;">{{ page.description }}</div>
-        <div style="line-height: 1.5;" class="article">
+        <div style="line-height: 1.5;" id="article">
             {{ page.content | safe }}
         </div>
     </div>

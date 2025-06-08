@@ -22,7 +22,7 @@
 {% set reading_width = "720px" %}
 {% set screen_width_threshold_medium = "800px" %}
 {% set screen_width_threshold_large = "1280px" %}
-{% set screen_width_threshold_xlarge = "1400px" %}
+{% set screen_width_threshold_xlarge = "1480px" %}
 {% set screen_width_threshold_huge = "1700px" %}
 
 
@@ -178,14 +178,14 @@
         @media screen and (max-width: {{ screen_width_threshold_xlarge }} ) {
             #article-index {
                 margin-left: 0%;
-                max-width: 300px;
+                max-width: 280px;
             }
         }
 
         @media screen and (min-width: {{ screen_width_threshold_xlarge }} ) {
             #article-index {
                 margin-left: 32px;
-                max-width: 300px;
+                max-width: 400px;
             }
         }
 
@@ -199,6 +199,14 @@
             #article-index {
                 display: initial;
             }
+        }
+
+        #article-index .dark-active {
+            background-color: {{ dark_highlight_color }};
+        }
+
+        #article-index .light-active {
+            background-color: {{ light_highlight_color }};
         }
 
         @media screen and (max-width: {{ screen_width_threshold_medium }} ) {
@@ -230,6 +238,10 @@
             margin-bottom:2px;
         }
 
+        blockquote code {
+            font-style: normal;
+        }
+
         pre {
             padding: 16px;
             margin: 32px 16px 32px 0px;
@@ -241,26 +253,26 @@
             font-size: 110%;
         }
 
-        .article img {
+        #article img {
             display: block;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 32px;
         }
 
-        .article code {
+        #article code {
             background-color:#2b303b;
             color:#c0c5ce;
             padding:2px 4px;
             font-size: 110%;
         }
 
-        .article h2 {
+        #article h2 {
             margin-top: 48px;
             margin-bottom: 16px;
         }
 
-        .article h3 {
+        #article h3 {
             margin-top: 32px;
             margin-bottom: 8px;
         }
@@ -274,7 +286,7 @@
     margin: 0px;">
     <div style="min-height:100vh; width: 100%; display: flex; flex-direction: column; justify-content: start;">
         <!-- Navbar -->
-        <div style="position: relative;" class="dark-secondary-bg">
+        <div style="position: relative;" class="dark-secondary-bg" id="navbar">
             {{ macros::navbar_line(shift = 0, class="dark-bg") }}
             {{ macros::navbar_line(shift = 42, class="dark-bg") }}
             {{ macros::navbar_line(shift = 42*2, class="dark-bg") }}

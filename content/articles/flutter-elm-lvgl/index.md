@@ -8,26 +8,24 @@ topics = ["flutter", "elm", "lvgl", "rant", "ui"]
 +++
 
 In my line of work I frequently need to develop user interfaces for a variety of purposes and platforms.
-For the most part, it's an interesting and entertaining endevour. There's some artistry involved in orchestrating an intuitive, effective and efficient interface.
+For the most part, it's an interesting endevour. There's artistry involved in orchestrating an intuitive, effective and efficient interface.
 
-> Painstakingly trying to align that button to all its peers when the framework just refuses to do so on the other hand never gets any less frustrating.
+> On the other hand, painstakingly trying to align that button to all its peers when the framework just refuses to do so never gets any less frustrating.
 
-On the software side widget structure and data flow are very complex and engaging problems. UI is frequently made up of very similar but not quite identical building blocks that are difficult to abstract properly. 
-Then there is the principle of separation between UI and business and the assortment of techniques and theories devoted to the cause.
+Speficically, managing the entwinement between UI structure and data flow is a very engaging task. Data is ordered and rigorous, while the screen is frequently made up of similar but not quite identical building blocks that are difficult to abstract properly. The two components must dance in harmony while keeping each other at an arm's length for safety.
 
-It may seem trivial - I know it did to me at first! - but proper structure is paramount in building such an application. 
-From a software engeneering standpoint the UI is a monster in disguise: it can easily become the biggest component, clinging to the rest of the project with deep, hard to remove dependency tendrils unless properly weeded and tended to with care and reverence.
+It may seem trivial - I know it did to me at first! - but proper architecture is paramount here. The UI is a monster in disguise: in spite of being one of the least important parts (from a software perspective), it can easily become the biggest component, clinging to the rest of the project with deep, hard to remove dependency tendrils.
 
 Over the years I've racked up a decent experience with multiple, sometimes radically different solutions to these challenges.
-Today I'd like to compare three of those frameworks in order to make a case about proper library design, criticizing one of them in them process.
+Today I'd like to compare three UI frameworks in order to make a case about proper library design, criticizing one of them in them process.
 
 ## LVGL
 
-Possibly the lesser known tool among those I'll mention today, LVGL holds a special place in my heart. It is the only practical UI library for embedded devices that I know of and most of my work wouldn't be possible without it.
+Possibly the lesser known tool among those I'll mention today, [LVGL](https://github.com/lvgl/lvgl) holds a special place in my heart. It is the only practical UI library for embedded devices (that I know of) and most of my work wouldn't be possible without it.
 
-> Others obviously exist, but are mostly held back by proprietary tooling or licensing hurdles.
+> Others obviously exist, but are mostly held back by [proprietary tooling](https://www.st.com/en/development-tools/touchgfxdesigner.html) or [licensing hurdles](https://www.qt.io/qt-licensing).
 
-It's made in C with focus on portability, resource-constrained environments and efficiency.
+It's made in C with focus on portability, low resource usage and efficiency.\
 Between the programming language and the preferred targets one could expect quite a harsh experience; instead, working with LVGL is surprisingly pleasant. Let's see a small example:
 
 ```C
@@ -73,22 +71,21 @@ int main(void) {
 }
 ```
 
-While not exactly up to the standard of higher level frameworks, the code should be fairly readable by virtue of being dead simple: create a button with some text inside; when the button is clicked call a function. Whitin this callback we have some logic and a corresponding UI update.
+While not exactly up to the standard of higher level frameworks, the code remains fairly readable by virtue of being dead simple: create a button with some text inside; when the button is clicked call a function; within this callback manage some application logic and update the UI accordingly.
 
-When properly setup and compiled (the library is only distributed from sources and C doesn't have a package manager, so it's not straightforward), you are greeted by something like this at runtime:
+When properly setup and compiled (the library is only distributed from sources and C doesn't have a package manager, so it's not straightforward), you are greeted by something like this:
 
 ![LVGL window](lvgl1.png)
 
-Depending on what you are used to, this approach may look primitive - and it is. It is based on retained state UI with a *very* imperative API. 
-
+Depending on what you are used to, this approach may look primitive - and it is. It is based on retained state UI with a *very* imperative API.\
 You want a button? Create one. 
 You want to know when it has been clicked? Attach a callback to it.
 You need to update the label with the new state? You better keep track of that pointer.
 
-It is archaic in the sense that the developer is responsible for everything. There are reasons for that of course - performance being the first in line - but that still opens you to a plethora of nasty bugs and problems that you have to tackle yourself.
+It is archaic in the sense that the developer is responsible for everything. There are reasons for that of course - performance being the first in line - but the fact doesn't change that it leaves you vulnerable to a plethora of nasty bugs.\
+For example, I mentioned that UI and business logic should be kept distinct. It is not the case in this example: `button_event_cb` acts out the application logic but needs to be attached to the UI directly (it even takes a UI data type as parameter). 
 
-For example, remember when I mentioned UI and business logic? In this example they are not exactly distinct.
-`button_event_cb` acts out the application logic but needs to be attached to the UI directly - it even takes a UI data type as parameter. To properly separate them, we could try something like this:
+To separate them we could try something like this:
 
 ```C
 #include "model.h"
@@ -101,36 +98,34 @@ static void button_event_cb(lv_event_t *e) {
 }
 ```
 
-The application data is hidden in a `model` module that can be developed and tested separately from the UI. The label update should probably be moved somewhere else with an event system to cover the eventuality of a counter change due to different sources, but you get the idea. 
+The application data is now hidden in a `model` that can be developed and tested separately from the UI. The label update should probably be moved somewhere else with an event system to cover the eventuality of a counter change due to different sources, but you get the idea. 
 
 This is a good starting point, but it was on me (i.e. the developer) to implement it. What if I didn't know any better? How long would it take me to reach a satisfying solution? What about other similar issues, like splitting the UI in pages or implementing some kind of navigation stack?
 
-LVGL just helps you putting stuff on the screen.
-Suffice to say, it took me quite a while of trial and error to properly understand the importance of such policies and how to achieve an effective result. 
+LVGL just helps you putting stuff on the screen; this kind of features is your responsibility.
+Suffice to say, it took me quite a lot of trial and error to implement them properly, with clean and maintainable results.
 
 This is unfortunate, but I want to focus on what's good. The *intent* of the library, for example, is **extremely** clear. 
 Most programmers will be familiar with the imperative style - it's arguably the simplest to start with - and understand how that works right away. 
-You may consider it verbose and somewhat hard to read, but thanks to its simplicity the API is exceptionally intuitive, communicating immediately and perfectly how it works. 
-
-Create a widget, attach a callback, modify the widget. Couldn't be any more limpid. Could it?
+You may consider it verbose and somewhat hard to read, but thanks to its simplicity the API is exceptionally intuitive, communicating immediately and perfectly how it works.\
+Create a widget, attach a callback, modify the widget. Couldn't be any more limpid.
 
 ## Elm
 
-Jumping to the extreme opposite end of the spectrum we find Elm. 
+To the extreme opposite end of the spectrum we find [Elm](https://elm-lang.org/).
 
-First of all, it builds web applications, so it's aimed at a completely different target.
-While I deem it more of a UI framework it is technically also a programming language - although a domain-specific one, created with the purpose of crafting web pages.
-It could be described as a much simpler version of Haskell. Accordingly, its most prominent feature is a purely functional nature. 
+First of all, it builds web applications, so it's aimed at a completely different target. While I deem it more of a UI framework it is technically also a programming language - although a domain-specific one. 
+It could be described as a much simpler version of Haskell; accordingly, its most prominent feature is a purely functional nature. 
+It's definitely a somewhat exotic approach to UI development but one that fits surprisingly well. 
 
-It's definitely a somewhat esotic approach to UI development but one that fits surprisingly well. It funnels the developer experience into an hyperspecific and rigid application structure called The Elm Architecture (TEA for short).
-
+As a library, Elm funnels the developer experience into an hyperspecific and rigid application structure called The Elm Architecture (TEA for short).
 In a nutshell TEA is based on three simple components:
 
  - `Model`: the application's data, as in [all of it](https://en.wikipedia.org/wiki/Single_source_of_truth). A single data structure and reference where every information internal to the program is stored and modified - not directly since all data is immutable in Elm, but by instantiating a new value every time.
  - `View`: a function that converts the `Model` into a UI representation that can be displayed on a browser, closely related to HTML but still described with Elm's own data structures.
  - `Update`: a function that takes the current `Model`, an event (something coming from the UI or the underlying system) and returns a new `Model`.
 
-Let's take a look at a similar example to get acquainted with it:
+Let's take a look at another counter application example to get acquainted with it:
 
 ```elm
 module Main exposing (main)
@@ -182,13 +177,13 @@ main =
 
 You can see the example in action [here](https://ellie-app.com/tjSLxFccpFPa1).
 
-Every piece is trivial by itself, and the combination reaches its peak of complexity in the `Browser.sandbox` call. That's the framework's entry point for defining an application: it basically just collects the three components and ties them up. The resulting code is clear and readable, although a bit verbose at times.
+Every piece is trivial by itself, and the combination reaches its peak of complexity in the `Browser.sandbox` call. That's the framework's entry point for defining an application: it just collects the three components and ties them up. The resulting code is clear and readable, although a bit verbose at times.
 
-> One may take a look at Elm and argue that the functional approach is not so understandable in general, but counter-arguably that's only due its non conventional nature - as in it becomes clear once you get used to the paradigm.
+> One may take a look at Elm and argue that the functional approach is not so understandable in general, but counter-arguably that's only due its non conventional nature; it becomes clear once you get used to the paradigm.
 
 It's worth nothing how the button's click is connected to the incrementing action: the UI representation (`Html Msg`) depends on the `Msg` type, and the `button` element is assigned `Increment` as message to send on click. When such an event occurs the framework simply invokes `update` and updates the `Model` with the result.
 
-This approach solves the division of application and UI logic by denying the existence of the latter. UI is just a data structure here, there's no logic at all!
+This approach solves the division of application and UI logic with a radical approach: the existence of the latter is simply denied. Since UI is just a data structure, it can contain no logic at all!
 
 > Technically one may engage in some major tomfoolery by passing a function in lieu of the message (writing something like `button [onClick (\model -> {model | counter = model.counter + 1})]`) and reduce `update` to just calling that same function when it is delivered. In a way this is like injecting logic back into a dry UI. There are some edge cases where it may be useful but I generally don't recommend it.
 
@@ -199,25 +194,25 @@ The catch is that the Elm runtime internally caches the DOM tree, diffs the new 
 
 ## Great Tools Work Alike
 
-It is hopefully obvious just how different LVGL and Elm are. One is a low-level and heavily reliant on a mutating internal state; the other creates a high-level interface of immutable data and pure functions to strictly direct the application flow. Beyond their implementation and API however they share two characteristics of paramount importance:
+It is hopefully obvious just how different LVGL and Elm are. One is a low-level and heavily reliant on a mutating internal state; the other creates a high-level interface of immutable data and pure functions to strictly direct the application flow. Beyond their implementation and API however they share three characteristics of supreme importance:
 
  1. You don't need to know the internal details of the framework to use it. Implementation details and optimization strategies do not transpire from the API; while interesting in its own right, that information would only cause unnecessary friction - or worse, *confusion* - when using the library.
  2. The function and intent of every part of the framework is always crystal clear. There is rarely more than one obvious way to achieve the desired result.
+ 3. Greater features are implemented by combining basic building blocks. A light skim of the documentation will leave you capable of building any UI, no matter how complex, by applying repeatedly the few foundational principles of each framework.
 
 > There are specific situations where delving deeper into implementation details is necessary, but such is the tradeoff when particular performance is required. For example, LVGL widgets can be disassembled and fine tuned for fast drawing, and the evaluation of Elm elements can be postponed if they are not displayed on the screen by enclosing them in lazy wrappers.
 
-These two principles make the learning process for both tools expedite and pleasant. Once the requirements are set, little time is wasted pondering how they can be realized by the code. The answer to any technical question is found quickly in the relevant documentation with no room for debate.
+These three pillars make the learning process for both tools expedite and pleasant. Once the requirements are set, little time is wasted pondering how they can be realized by the code, and the answer to any technical question is found quickly with little to no debate.\
+This applies even when the framework doesn't provide an integrated route (I'm referring to LVGL especially). "Roll up your sleeves and do it yourself however you see fit" is still a direct response.
 
-This applies even when the framework doesn't provide an integrated route (I'm referring to LVGL especially). "Roll up your sleeves and do it yourself however you see fit" is still a direct and clear response.
-
-This is not just due to a extensive and well organized documentation (although it is another aspect that can be praised for both projects): the frameworks themselves are built in such a way that the flow of information and control is always crystal clear; you are never left guessing what's going on or how to achieve the basic steps, eliminating the risk of working against the tool instead of with it.
+It may be tempting to attribute such effectiveness to a will written documentation documentation, but although it is another aspect that can be praised for both projects, that's not it: the frameworks themselves are built in such a way that the flow of information and control is always crystal clear. The tool works with you, not against you.
 
 To me, this should be the main requirement any library should strive to meet; yet, I'm about to complain extensively of an extremely popular framework that goes full speed in the opposite direction.
 
 ## Flutter
 
-Developing UIs is all sunshine and roses until the target platforms multiply like cockroaches. 
-The search for one true solution for cross-platform application development has spawned a never ending undergrowth of tools that claim to succeed, but no approach is entirely satisfying. 
+Developing UIs is all sunshine and roses until they have to work on multiple devices.
+The search for the perfect cross-platform application development pipeline has spawned a never ending undergrowth of tools, libraries and frameworks. Each claims to succeed, but no approach is entirely satisfying. 
 
 > You can (almost) always compile whatever you are dealing with to a web page - Elm does that directly and even C can be compiled to webassembly with `emcc` - and then transform to a ""native"" application via a webview. That's what most of those cross-platform framework do under the hood anyway.
 
@@ -227,13 +222,11 @@ Backed by an active community (and a continous, significant investment from big 
 While this remains a big reason to choose it in practice, my words of praise end here. The framework itself is, for the lack of a better work, a mess.
 To understand what's wrong with it, let's try to replicate the same counter example that we should know well by know.
 
-First things first, one should understand what kind of approach Flutter takes - which is where we encounter the first issues.
-
 Dart is a traditional imperative and object oriented programming language, so Flutter UIs are naturally costructed with widget objects similarly to LVGL. 
-Unlike LVGL however their appearance is not directly controlled by the API; instead, every `Widget` must implement the `build` method, which should return a subtree that describes what is displayed on the screen.
-The basic building block for a UI in flutter is the `StatelessWidget`, a class that should be inherited to customize it. Being an object in an object-oriented programming language it can absolutely have a state, so what's with the name? 
+Unlike LVGL however their appearance is not directly controlled by the API; instead, every `Widget` must implement the `build` method, which should return a subtree that describes what is displayed on the screen.\
+The basic building block for a UI in flutter is the `StatelessWidget`. Developers are supposed to inherit from it in order to create custom `Widget`s. Being an object in an object-oriented programming language it can absolutely have a state, so what's with the name? 
 
-Well, a `StatelessWidget` is not *supposed* to have a state because it wouldn't matter. Its build method is only called once when it's created, so it will ignore any future modification like incrementing a internal counter.
+Well, a `StatelessWidget` is not *supposed* to have a state because it wouldn't matter for the UI. Its `build` method is only called once when it's created and it will ignore any future modification like incrementing a internal counter.
 
 To implement something remotely interesting we must turn to another class, the `StatefulWidget`. Ah, this one will surely allow me to keep track of an internal state and update the UI accordingly, right? Yes, but *not by itself*. 
 
@@ -250,14 +243,14 @@ void main() {
   ));
 }
 
-class CounterWidget extends StatefulWidget {
+class CounterWidget extends StatefulWidget { // Counter Widget
   const CounterWidget({super.key});
 
   @override
   State<CounterWidget> createState() => CounterState();
 }
 
-class CounterState extends State<CounterWidget> {
+class CounterState extends State<CounterWidget> { // State object for the Counter Widget
   int counter = 0;
 
   CounterState();
@@ -292,12 +285,13 @@ Despite the simplicity of the example, there is a lot to unpack here.
 
 Notice how I needed to create two separate classes in order to implement a counting widget: `CounterWidget` and `CounterState`. Looking at the names alone one may assume the former to describe the UI and the latter to encapsulate the data behind it; the code, however, tells a different story.
 
-`CounterWidget` is nothing but boilerplate. It serves no particular function beside proclaming its existence and affiliation with `CounterState`. The latter on the other hand pulls all the weight, both keeping track of the `counter` and overriding `build`. There are two main issues with this approach:
+`CounterWidget` is nothing but boilerplate. It serves no particular function beside proclaming its existence and affiliation with `CounterState`, which on the other hand pulls all the weight, keeping track of the `counter` and overriding `build`.\
+There are two main issues with this approach:
 
  1. I had to declare two classes for a single custom widget. Worse of all, one of them carries no relevant information. That is quite a heavy burden for what's supposed to be the bread and butter for UI construction.
  2. The UI description is handled by the class called `State`, not the one with `Widget` in its name. It is a profoundly confusing design choice that will never not aggravate me (and honestly the main drive for this rant).
 
-> Yes, I'm aware that code snippet generation is a thing. No, it doesn't solve the underlying issue: resulting code is still harder to read.
+> Yes, I'm aware that [code snippet generation is a thing](https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets). It doesn't solve the underlying issue: resulting code is still harder to read.
 
 Now let's take a look at how and where the framework handles refreshing the screen. You are not supposed to call `build` yourself, so it's not your direct responsibility as in LVGL. We had to create a different class specifically for the `State` part, so maybe the runtime will recognize when that changes like Elm does?
 
@@ -306,7 +300,7 @@ You are expected to use this anonymous function parameter to modify the state th
 This sophisticated-sounding passage hints at some deeper mechanism where every mutation is carried on in a special context. I was convinced of that for the longest time, until I decided to unwrap the ridicolous hell that is state management in Flutter. 
 
 It turns out that `setState` simply triggers a rebuild of the widget and that's it. The closure is called to ensure the mutation but nothing prevents it from happening before the function.
-I suppose this is an attempt at isolating mutation even when there is no reasonable path to enforce it. As it stands, it just creates an aura of mistery that ends up feeling silly. 
+I suppose this is an attempt at isolating mutation even when there is no reasonable path to enforce it. As it stands, it just creates a silly aura of mistery.
 
 > Yes, I realize I am nitpicking. I'll also use `setState` inappropriately from now on, out of spite.
 
@@ -545,7 +539,7 @@ Since the UI is just code we can easily fix it with a sprinkle of abstraction.
   }
 ```
 
-Very satisfying, isn't it? Unexpectedly, also wrong. I mean, it works, but according to Flutter etiquette you absolutely shouldn't do it. 
+Very satisfying, isn't it? Unexpectedly, also wrong. I mean, it works, but according to Flutter etiquette [you absolutely shouldn't do it](https://www.youtube.com/watch?v=IOyq-eTRhvo). 
 
 To clarify, this taboo is not focused on the act of abstracting out a repeating piece of the UI, but on the fact of using functions - you know, the base building block for abstraction - to do so. The proper path to follow would be to define an entirely new `Widget` class, like so:
 
@@ -755,15 +749,48 @@ Now, while the principle of having all the responsibility with none of the agenc
 
 ### Sophisticated State Management
 
-This last example highlighted another massive problem with Flutter: state management. `StatefulWidget`s are meant to 
+While most of the issues I've highlighted stem from a general awkwardness around state management, the specifics of the `StatefulWidget` class have a lot of flaws of their own.
+
+Data at the heart of real-world application will likely be more complex than a simple integer counter, nesting over substrates of fields and containers. Since a `StatefulWidget` only controls the redrawing of its entire `Widget` tree, the developer is left with two paths:
+
+ 1. The sensible choice to keep all data in a single place forces you to update the whole screen with any change, no matter how small. If you value the performance of your application, this will eventually become a deal breaker.
+ 2. The only way to filter `Widget` tree updates is to separate it into multiple `StatefulWidget`, but now the state is split with it: simply reading and writing it become a nightmare of reference tracking and change synchronization, leading to an endless stream of refactoring and runtime errors.
+
+The official documentation itself [admits](https://docs.flutter.dev/data-and-backend/state-mgmt/options) the basic tools offered by the framework aren't enough:
+
+> State management is a complex topic. If you feel that some of your questions haven't been answered, or that the approach described on these pages is not viable for your use cases, you are probably right.
+
+As is often the case, third party libraries come into play to attempt and fix these limitations, with varying degrees of success. 
+
+Bloc offers a structured approach hinging on the `BlocBuilder` and similar widgets, basically a `StatefulWidget` on steroids. It is generic on the state class and needs to be attached to the `Widget` tree, providing a reference for the state instance to the underlying subtree.\
+While its interface is more powerful and - to and extent - usable, it still suffers from many drawbacks. For starters, it's not simple: you are expected to work within the omonimous design pattern, which I find bloated and confusing; what's more, it seems to encourage splitting the state into many different `Bloc`s, resulting in a fractured and convoluted architecture.\
+Secondly, fetching a `State` reference is a runtime operation that can fail if no instance is found in the tree above. Getting the core information of my program shouldn't be hit or miss.
+
+Riverpod pivots on this last point and promises statically guaranteed access to state objects by virtue of... Global variables. Yes, you read that right.\
+`Provider`s act as state wrappers just like `Bloc`, exept you should only define them as `final` at the top of the program. The documentation explains that while setting them up as global symbols may seem ill-advised, they are actually very different from the scenario that you are told to avoid since your first programming lesson; yet, it doesn't convince me.
+
+Sure, the `Provider` instance itself is immutable, but its main purpose is to provide a reference to some mutable state. The mutability is still there, albeit hidden behind an additional layer. Moreover, unrestricted global simbols increase coupling all around the project regardless of their alleged constant nature.\
+Having UI fragments always refer to some external label makes abstracting them much harder than it needs to be. It's possible to establish a `Provider` that is only visible for a specific `Widget` subtree, but the approach is meant for testing purposes only (and generally frowned upon).
+
+Unfortunately not even this tradeoff can keep Riverpod completely safe from runtime errors. All of these wrapping classes - `Bloc` or `Provider` - implement some form of observer pattern: they contain a state, limit its mutability with an API an signal every change to a list of listeners; `Widget`s that display the underlying data should subscribe to the observer, triggering a rebuild on every change.\
+In Riverpod this is done implicitly whenever the state is accessed with the `watch` method. The application can also require a reference to the state object without the subscription however, and that's where `read` comes in. You must be careful not to mix them up! Invoking `read` from within the `build` method will fail to update the UI on state change, while a `watch` call outside of it is bad enough to warrant an ominous warning note.
+
+![riverpod.png](warning)
+
+These nebulous invariants are the *leit motif* of the whole framework spilling into its libraries. Think about `setState`, a method that receives a closure but doesn't actually call it in a different setting; or how your business logic can end up with an invalid reference after the UI has slightly changed; screen updates that don't happen because of some obscure combination of static types and dynamic configuration between your `Widget`s. A mixture of unenforced and poorly explained rules that try to hide from the developer, only to resurface as bloated bug carcasses.
 
 ## Conclusion
 
-This "three way comparison" has finally turned into a full blown, unapologetic rant about Flutter. That's my bad. I still believe that the analogies with two lesser known UI frameworks were helpful in highlighting its shortcomings.
+By now you have probably realized that the "three way comparison" was just an excuse for a full blown, unapologetic rant about Flutter. Guilty as charged. Still, some interesting conclusions can be drawn by looking at the differences. Unlike Flutter, both LVGL and Elm are blessed with a clear interface and intuitive mechanics. I think the reasons behind this can be found in the environment they grew up in.
 
-What's the takeway here? Not much, I'm afraid. Flutter doesn't need to abide to good design in order to be used, because it will always be the most funded cross-platform framework out there. It doesn't matter how inconsistent and unintuitive its API is; in the end, if it gets you to a working application with the least amount of time and resources it will trump on every other competitor with ease.
+All three are thecnically "open source" (MIT and BSD-3 licensing). However, while LVGL and Elm had to develop a solid, well-rounded software architecture in order to become successful, Flutter still benefits from a bulky private sponsorship kept it going no matter what.
 
-This unfortunately applies to me first and foremost; alas, I wouldn't be complaining so much about a tool if I could simply replace it with a better one.\
-I just hope the next tech-giant-sponsored project tries a little bit harder to start from solid foundations.
+> The tech giant's involvement in Flutter is so deep it's a miracle its name wasn't somehow injectected into the project's title.
+
+Flutter doesn't need to abide to good design in order to be used, because it will always be the most funded cross-platform framework out there. It doesn't matter how inconsistent and unintuitive its API is; in the end, if it gets you to a working application with the least amount of time and resources it will trump on every other competitor with ease. 
+
+This unfortunately applies to me first and foremost. Alas, I wouldn't be complaining so much about a tool if I could simply replace it with a better one.
+
+TODO compare flutter to the three points mentioned previously
 
 ![old me yells at Flutter](oldmanyellsatcloud.jpg)
