@@ -1,0 +1,1144 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html style="min-height: 100%;" lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <meta charset="utf-8">
+    <title>Maldus512</title>
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://maldus512.github.io/rss.xml">
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        a {
+            color: inherit;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #8cafd2;
+        }
+
+        h1 {
+            margin-bottom:32px;
+        }
+
+        a:hover {
+           cursor: pointer;
+        }
+
+
+        button, .button {
+            background-color: transparent;
+            cursor: pointer;
+        }
+
+        .topic {
+            text-decoration: none;
+            background-color: #bc6548;
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .topic-link {
+            font-size: large;
+            padding: 12px !important;
+        }
+
+        .button-link {
+            text-decoration: none;
+        }
+
+        .button-link:hover {
+            text-decoration: underline;
+            text-shadow:1px 0px 0px;
+        }
+
+        .ui-link:hover {
+            text-shadow:1px 0px 0px;
+        }
+
+        .article-card {
+            border: solid;
+            border-width: 2px;
+            margin-bottom: 32px;
+            text-decoration: none;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .article-link {
+            text-decoration: none;
+        }
+
+        .article-link:hover .topic{
+            background-color: #c57b62;
+        }
+
+        .article-link:active .topic{
+            background-color: #c57b62;
+        }
+
+        .dark-bg {
+            background-color: #2e3440;
+        }
+
+        .dark-scrollbar {
+            background-color: #8cafd2;
+        }
+
+        .dark-fg {
+            color: #f0f0f0;
+        }
+
+        h1.dark-fg, h2.dark-fg, h3.dark-fg, h4.dark-fg, h5.dark-fg, h6.dark-fg {
+            color: #8cafd2;
+        }
+
+        .dark-secondary-bg {
+            background-color: #232831;
+        }
+
+        .dark-border {
+            border-color: #444c5e;
+        }
+
+        .dark-highlight, .dark-hover:hover, .dark-hover:active, .dark-button:hover {
+            background-color: #444c5e;
+        }
+
+        .light-bg {
+            background-color: #f6f2ee;
+        }
+
+        .light-scrollbar {
+            background-color: #223d90;
+        }
+
+        .light-fg {
+            color: #3d2b5a;
+        }
+
+        h1.light-fg, h2.light-fg, h3.light-fg, h4.light-fg, h5.light-fg, h6.light-fg {
+            color: #223d90;
+        }
+
+        .light-secondary-bg {
+            background-color: #e4dcd4;
+        }
+
+        .light-border {
+            border-color: #e7d2be;
+        }
+
+        .light-highlight, .light-hover:hover, .light-hover:active, .light-button:hover {
+            background-color: #e7d2be;
+        }
+
+        .inherit-bg {
+            background-color: inherit;
+        }
+
+
+        @media screen and (max-width: 1400px ) {
+            #article-index {
+                margin-left: 0%;
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (min-width: 1400px ) {
+            #article-index {
+                margin-left: 32px;
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (max-width: 1280px ) {
+            #article-index {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 1280px ) {
+            #article-index {
+                display: initial;
+            }
+        }
+
+        @media screen and (max-width: 800px ) {
+            .navbar-link {
+                flex-grow: 1;
+            }
+        }
+
+        @media screen and (min-width: 800px ) {
+            #article-page {
+                margin-top: -40px;
+            }
+        }
+
+        /* Article style */
+        blockquote {
+            text-align: right;
+            font-style: italic;
+            border-style: solid;
+            border-width: 1px 4px 1px 1px;
+            margin-right: 16px;
+            margin-top: 24px;
+            margin-bottom: 24px;
+            padding: 4px 16px;
+        }
+
+        blockquote p {
+            margin-top:2px;
+            margin-bottom:2px;
+        }
+
+        pre {
+            padding: 16px;
+            margin: 32px 16px 32px 0px;
+            white-space: pre-wrap;       /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            font-size: 110%;
+        }
+
+        .article img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 32px;
+        }
+
+        .article code {
+            background-color:#2b303b;
+            color:#c0c5ce;
+            padding:2px 4px;
+            font-size: 110%;
+        }
+
+        .article h2 {
+            margin-top: 48px;
+            margin-bottom: 16px;
+        }
+
+        .article h3 {
+            margin-top: 32px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body 
+    class="dark-bg dark-fg"
+    style="
+    font: 100% Ubuntu, sans-serif;
+    margin: 0px;">
+    <div style="min-height:100vh; width: 100%; display: flex; flex-direction: column; justify-content: start;">
+        <!-- Navbar -->
+        <div style="position: relative;" class="dark-secondary-bg">
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 0px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 42px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 84px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+            
+<div
+    class=dark-bg
+    style="position:absolute; bottom : 126px; z-index: 0; width: 100%; height: 3px; margin-bottom:2px; overflow-x : clip;">
+</div>
+
+
+            <div style="width: 100%; display: flex; flex-direction: row; flex-wrap: wrap-reverse; justify-content: space-between;">
+                <div id="navbar-links" style="flex-grow: 1; display: flex; flex-wrap: wrap-reverse; justify-content: start;">
+                    
+<a href="&#x2F;articles&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        Articles
+    </div>
+</a>
+
+                    
+<a href="&#x2F;projects&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        Projects
+    </div>
+</a>
+
+                    
+<a href="&#x2F;talks&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        Talks
+    </div>
+</a>
+
+                    
+<a href="&#x2F;about&#x2F;" class="button-link navbar-link " style="
+    
+    flex-direction: row; 
+    display: inline-flex; 
+    min-width: 120px; 
+    padding: 8px 20px 12px 20px; 
+    overflow: visible; 
+    justify-content: center; 
+    align-items: center;">
+    <img  src="/icons/icon-dark-folder.svg"  style="max-height: 20px; max-width: 20px; margin-right: 8px;" class="icon" />
+    <div class="navbar-label" style="font-size: larger; display: flex;">
+        About
+    </div>
+</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div style="padding-top: 16px; display: flex; flex-grow: 1; flex-direction: column; align-items: center; padding-left:24px; padding-right:24px;">
+            <div id="theme-btn" style="display: none; cursor:pointer; position: absolute; right: 16px;">
+                <a style="display: flex; justify-content: end; align-items: center;">
+                    <img src="/icons/icon-dark-theme.svg" id="theme-img" style="max-height: 24px; max-width: 24px;"/>
+                </a>
+            </div>
+            <div style="padding-top: 32px; flex-grow: 1; display: flex; flex-direction: column; width: 100%;">
+                
+
+<div style="width: 100%; display: flex; flex-direction: row; align-items: center; justify-content: center; flex-grow:1;" id="article-page">
+    <div style="position:fixed; left: 0px; top:10%;" id="article-index">
+    
+    <ul style="list-style-image: url('/icons/icon-angle-down.svg');">
+        
+            <li>
+                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#lvgl">LVGL</a></h3>
+                
+            </li>
+        
+            <li>
+                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#elm">Elm</a></h3>
+                
+            </li>
+        
+            <li>
+                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#great-tools-work-alike">Great Tools Work Alike</a></h3>
+                
+            </li>
+        
+            <li>
+                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#flutter">Flutter</a></h3>
+                
+                <ul style="list-style: none outside none; padding-left:4px;" class="dark-fg">
+                        
+                            <li>
+                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#shaky-foundations">Shaky Foundations</a></h3>
+                            </li>
+                        
+                            <li>
+                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#lost-in-dark-forests">Lost in Dark Forests</a></h3>
+                            </li>
+                        
+                            <li>
+                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#widgets-widgets-everywhere">Widgets, Widgets Everywhere</a></h3>
+                            </li>
+                        
+                            <li>
+                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#static-typing-dynamic-errors">Static Typing, Dynamic Errors</a></h3>
+                            </li>
+                        
+                            <li>
+                                <h3 style="margin-bottom: 8px; margin-top: 0px; font-size: medium;"># <a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#sophisticated-state-management">Sophisticated State Management</a></h3>
+                            </li>
+                        
+                    </ul>
+                
+            </li>
+        
+            <li>
+                <h3 style="margin-bottom: 8px; margin-top: 16px;"><a class="ui-link" href="https://maldus512.github.io/articles/flutter-elm-lvgl/#conclusion">Conclusion</a></h3>
+                
+            </li>
+        
+        </ul>
+    
+    </div>
+    <div style="flex-grow: 1; max-width: 720px; padding: 0px 16px 0px 16px;">
+        <div style="display: flex; flex-wrap: wrap-reverse; justify-content: space-between; align-items: center; row-gap: 16px; flex-direction: row; padding-top: 16px;">
+            <div style="color: #a0a0a0; margin-right: 32px;">27&#x2F;05&#x2F;2025</div>
+            <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: end; row-gap: 16px; column-gap: 16px;">
+                
+                <a class="topic topic-link button-link" href="https://maldus512.github.io/topics/flutter/" style="
+                                ">
+                    flutter
+                </a>
+                
+                <a class="topic topic-link button-link" href="https://maldus512.github.io/topics/elm/" style="
+                                ">
+                    elm
+                </a>
+                
+                <a class="topic topic-link button-link" href="https://maldus512.github.io/topics/lvgl/" style="
+                                ">
+                    lvgl
+                </a>
+                
+                <a class="topic topic-link button-link" href="https://maldus512.github.io/topics/rant/" style="
+                                ">
+                    rant
+                </a>
+                
+                <a class="topic topic-link button-link" href="https://maldus512.github.io/topics/ui/" style="
+                                ">
+                    ui
+                </a>
+                
+            </div>
+        </div>
+        <h1 style="flex-grow: 1; margin-bottom: 16px; margin-top: 32px;"> # Flutter, Elm and LVGL: a Three Way Comparison </h1>
+        <div style="font-style: italic; margin-bottom: 32px;"></div>
+        <div style="line-height: 1.5;" class="article">
+            <p>In my line of work I frequently need to develop user interfaces for a variety of purposes and platforms.
+For the most part, it's an interesting and entertaining endevour. There's some artistry involved in orchestrating an intuitive, effective and efficient interface.</p>
+<blockquote>
+<p>Painstakingly trying to align that button to all its peers when the framework just refuses to do so on the other hand never gets any less frustrating.</p>
+</blockquote>
+<p>On the software side widget structure and data flow are very complex and engaging problems. UI is frequently made up of very similar but not quite identical building blocks that are difficult to abstract properly.
+Then there is the principle of separation between UI and business and the assortment of techniques and theories devoted to the cause.</p>
+<p>It may seem trivial - I know it did to me at first! - but proper structure is paramount in building such an application.
+From a software engeneering standpoint the UI is a monster in disguise: it can easily become the biggest component, clinging to the rest of the project with deep, hard to remove dependency tendrils unless properly weeded and tended to with care and reverence.</p>
+<p>Over the years I've racked up a decent experience with multiple, sometimes radically different solutions to these challenges.
+Today I'd like to compare three of those frameworks in order to make a case about proper library design, criticizing one of them in them process.</p>
+<h2 id="lvgl">LVGL</h2>
+<p>Possibly the lesser known tool among those I'll mention today, LVGL holds a special place in my heart. It is the only practical UI library for embedded devices that I know of and most of my work wouldn't be possible without it.</p>
+<blockquote>
+<p>Others obviously exist, but are mostly held back by proprietary tooling or licensing hurdles.</p>
+</blockquote>
+<p>It's made in C with focus on portability, resource-constrained environments and efficiency.
+Between the programming language and the preferred targets one could expect quite a harsh experience; instead, working with LVGL is surprisingly pleasant. Let's see a small example:</p>
+<pre data-lang="C" style="background-color:#2b303b;color:#c0c5ce;" class="language-C "><code class="language-C" data-lang="C"><span style="color:#65737e;">// Example based on LVGL 9.0
+</span><span>
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdlib.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">stdint.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&lt;</span><span style="color:#a3be8c;">unistd.h</span><span>&gt;
+</span><span style="color:#b48ead;">#include </span><span>&quot;</span><span style="color:#a3be8c;">lvgl.h</span><span>&quot;
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">static int</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>
+</span><span>
+</span><span style="color:#b48ead;">static void </span><span style="color:#8fa1b3;">button_event_cb</span><span>(lv_event_t *</span><span style="color:#bf616a;">e</span><span>) {
+</span><span>    lv_obj_t *label = </span><span style="color:#bf616a;">lv_event_get_user_data</span><span>(e);
+</span><span>    counter++; </span><span style="color:#65737e;">// Application logic
+</span><span>    </span><span style="color:#bf616a;">lv_label_set_text_fmt</span><span>(label, &quot;</span><span style="color:#a3be8c;">Clicked </span><span style="color:#d08770;">%i</span><span style="color:#a3be8c;"> times</span><span>&quot;, counter); </span><span style="color:#65737e;">// Update the UI
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">main</span><span>(</span><span style="color:#b48ead;">void</span><span>) {
+</span><span>    </span><span style="color:#bf616a;">lv_init</span><span>(); </span><span style="color:#65737e;">// Initialize the library
+</span><span>
+</span><span>    </span><span style="color:#bf616a;">lv_sdl_window_create</span><span>(</span><span style="color:#d08770;">720</span><span>, </span><span style="color:#d08770;">480</span><span>); </span><span style="color:#65737e;">// Create an SDL window
+</span><span>    </span><span style="color:#bf616a;">lv_sdl_mouse_create</span><span>();          </span><span style="color:#65737e;">// Connect an input device (the mouse)
+</span><span>
+</span><span>    </span><span style="color:#65737e;">// Create a button
+</span><span>    lv_obj_t *button = </span><span style="color:#bf616a;">lv_button_create</span><span>(</span><span style="color:#bf616a;">lv_screen_active</span><span>());
+</span><span>    </span><span style="color:#bf616a;">lv_obj_center</span><span>(button);
+</span><span>    </span><span style="color:#65737e;">// A label inside it
+</span><span>    lv_obj_t *label = </span><span style="color:#bf616a;">lv_label_create</span><span>(button);
+</span><span>    </span><span style="color:#bf616a;">lv_label_set_text</span><span>(label, &quot;</span><span style="color:#a3be8c;">Click me!</span><span>&quot;); </span><span style="color:#65737e;">// Initial text
+</span><span>    </span><span style="color:#bf616a;">lv_obj_center</span><span>(label);
+</span><span>    
+</span><span>    </span><span style="color:#65737e;">// When the button is pressed, invoke `button_event_cb`
+</span><span>    </span><span style="color:#bf616a;">lv_obj_add_event_callback</span><span>(button, LV_EVENT_CLICKED, button_event_cb, label);
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">for</span><span>(;;) {
+</span><span>        </span><span style="color:#bf616a;">lv_handler</span><span>(); </span><span style="color:#65737e;">// Handle the library asynchronously
+</span><span>    }
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#d08770;">0</span><span>;
+</span><span>}
+</span></code></pre>
+<p>While not exactly up to the standard of higher level frameworks, the code should be fairly readable by virtue of being dead simple: create a button with some text inside; when the button is clicked call a function. Whitin this callback we have some logic and a corresponding UI update.</p>
+<p>When properly setup and compiled (the library is only distributed from sources and C doesn't have a package manager, so it's not straightforward), you are greeted by something like this at runtime:</p>
+<p><img src="https://maldus512.github.io/articles/flutter-elm-lvgl/lvgl1.png" alt="LVGL window" /></p>
+<p>Depending on what you are used to, this approach may look primitive - and it is. It is based on retained state UI with a <em>very</em> imperative API.</p>
+<p>You want a button? Create one.
+You want to know when it has been clicked? Attach a callback to it.
+You need to update the label with the new state? You better keep track of that pointer.</p>
+<p>It is archaic in the sense that the developer is responsible for everything. There are reasons for that of course - performance being the first in line - but that still opens you to a plethora of nasty bugs and problems that you have to tackle yourself.</p>
+<p>For example, remember when I mentioned UI and business logic? In this example they are not exactly distinct.
+<code>button_event_cb</code> acts out the application logic but needs to be attached to the UI directly - it even takes a UI data type as parameter. To properly separate them, we could try something like this:</p>
+<pre data-lang="C" style="background-color:#2b303b;color:#c0c5ce;" class="language-C "><code class="language-C" data-lang="C"><span style="color:#b48ead;">#include </span><span>&quot;</span><span style="color:#a3be8c;">model.h</span><span>&quot;
+</span><span>
+</span><span style="color:#b48ead;">static void </span><span style="color:#8fa1b3;">button_event_cb</span><span>(lv_event_t *</span><span style="color:#bf616a;">e</span><span>) {
+</span><span>    </span><span style="color:#bf616a;">model_increase_counter</span><span>();
+</span><span>
+</span><span>    lv_obj_t *label = </span><span style="color:#bf616a;">lv_event_get_user_data</span><span>(e);
+</span><span>    </span><span style="color:#bf616a;">lv_label_set_text_fmt</span><span>(label, &quot;</span><span style="color:#a3be8c;">Clicked </span><span style="color:#d08770;">%i</span><span style="color:#a3be8c;"> times</span><span>&quot;, </span><span style="color:#bf616a;">model_get_counter</span><span>());
+</span><span>}
+</span></code></pre>
+<p>The application data is hidden in a <code>model</code> module that can be developed and tested separately from the UI. The label update should probably be moved somewhere else with an event system to cover the eventuality of a counter change due to different sources, but you get the idea.</p>
+<p>This is a good starting point, but it was on me (i.e. the developer) to implement it. What if I didn't know any better? How long would it take me to reach a satisfying solution? What about other similar issues, like splitting the UI in pages or implementing some kind of navigation stack?</p>
+<p>LVGL just helps you putting stuff on the screen.
+Suffice to say, it took me quite a while of trial and error to properly understand the importance of such policies and how to achieve an effective result.</p>
+<p>This is unfortunate, but I want to focus on what's good. The <em>intent</em> of the library, for example, is <strong>extremely</strong> clear.
+Most programmers will be familiar with the imperative style - it's arguably the simplest to start with - and understand how that works right away.
+You may consider it verbose and somewhat hard to read, but thanks to its simplicity the API is exceptionally intuitive, communicating immediately and perfectly how it works.</p>
+<p>Create a widget, attach a callback, modify the widget. Couldn't be any more limpid. Could it?</p>
+<h2 id="elm">Elm</h2>
+<p>Jumping to the extreme opposite end of the spectrum we find Elm.</p>
+<p>First of all, it builds web applications, so it's aimed at a completely different target.
+While I deem it more of a UI framework it is technically also a programming language - although a domain-specific one, created with the purpose of crafting web pages.
+It could be described as a much simpler version of Haskell. Accordingly, its most prominent feature is a purely functional nature.</p>
+<p>It's definitely a somewhat esotic approach to UI development but one that fits surprisingly well. It funnels the developer experience into an hyperspecific and rigid application structure called The Elm Architecture (TEA for short).</p>
+<p>In a nutshell TEA is based on three simple components:</p>
+<ul>
+<li><code>Model</code>: the application's data, as in <a href="https://en.wikipedia.org/wiki/Single_source_of_truth">all of it</a>. A single data structure and reference where every information internal to the program is stored and modified - not directly since all data is immutable in Elm, but by instantiating a new value every time.</li>
+<li><code>View</code>: a function that converts the <code>Model</code> into a UI representation that can be displayed on a browser, closely related to HTML but still described with Elm's own data structures.</li>
+<li><code>Update</code>: a function that takes the current <code>Model</code>, an event (something coming from the UI or the underlying system) and returns a new <code>Model</code>.</li>
+</ul>
+<p>Let's take a look at a similar example to get acquainted with it:</p>
+<pre data-lang="elm" style="background-color:#2b303b;color:#c0c5ce;" class="language-elm "><code class="language-elm" data-lang="elm"><span style="color:#b48ead;">module </span><span>Main </span><span style="color:#b48ead;">exposing </span><span>(</span><span style="color:#8fa1b3;">main</span><span>)
+</span><span>
+</span><span style="color:#b48ead;">import </span><span>Browser
+</span><span style="color:#b48ead;">import </span><span>Html </span><span style="color:#b48ead;">exposing </span><span>(</span><span style="color:#b48ead;">Html</span><span>, </span><span style="color:#8fa1b3;">button</span><span>, </span><span style="color:#8fa1b3;">div</span><span>, </span><span style="color:#8fa1b3;">text</span><span>)
+</span><span style="color:#b48ead;">import </span><span>Html.Events </span><span style="color:#b48ead;">exposing </span><span>(</span><span style="color:#8fa1b3;">onClick</span><span>)
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">-- Application data
+</span><span style="color:#b48ead;">type alias Model </span><span>=
+</span><span>    </span><span style="color:#96b5b4;">{</span><span> counter : </span><span style="color:#d08770;">Int </span><span style="color:#96b5b4;">}
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">-- Initial value for the `Model`
+</span><span style="color:#8fa1b3;">initialModel </span><span style="color:#b48ead;">: Model
+</span><span style="color:#8fa1b3;">initialModel </span><span>=
+</span><span>    </span><span style="color:#96b5b4;">{</span><span> counter = </span><span style="color:#d08770;">0 </span><span style="color:#96b5b4;">}
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">-- Event type
+</span><span style="color:#b48ead;">type Msg </span><span>= </span><span style="color:#d08770;">Increment
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">-- Application logic
+</span><span style="color:#8fa1b3;">update </span><span style="color:#b48ead;">: Msg -&gt; Model -&gt; Model
+</span><span style="color:#8fa1b3;">update </span><span>msg model =
+</span><span>    </span><span style="color:#b48ead;">case </span><span>msg </span><span style="color:#b48ead;">of
+</span><span>        </span><span style="color:#d08770;">Increment </span><span>-&gt;
+</span><span>            </span><span style="color:#96b5b4;">{</span><span> model | counter = model.counter + </span><span style="color:#d08770;">1 </span><span style="color:#96b5b4;">}
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">-- UI construction
+</span><span style="color:#8fa1b3;">view </span><span style="color:#b48ead;">: Model -&gt; Html Msg
+</span><span style="color:#8fa1b3;">view </span><span style="color:#96b5b4;">{</span><span>counter</span><span style="color:#96b5b4;">} </span><span>=
+</span><span>    div </span><span style="color:#96b5b4;">[]
+</span><span>        </span><span style="color:#96b5b4;">[</span><span> button </span><span style="color:#96b5b4;">[</span><span> onClick </span><span style="color:#d08770;">Increment </span><span style="color:#96b5b4;">] [</span><span> text &lt;| &quot;</span><span style="color:#a3be8c;">Clicked </span><span>&quot; ++ </span><span style="color:#b48ead;">(</span><span style="color:#d08770;">String</span><span>.fromInt counter</span><span style="color:#b48ead;">) </span><span>++ &quot;</span><span style="color:#a3be8c;"> times</span><span>&quot; </span><span style="color:#96b5b4;">] ]
+</span><span>
+</span><span>
+</span><span style="color:#65737e;">-- Tying everything together with `Browser.sandbox`
+</span><span style="color:#8fa1b3;">main </span><span style="color:#b48ead;">: Program </span><span>() </span><span style="color:#b48ead;">Model Msg
+</span><span style="color:#8fa1b3;">main </span><span>=
+</span><span>    </span><span style="color:#d08770;">Browser</span><span>.sandbox
+</span><span>        </span><span style="color:#96b5b4;">{</span><span> init = initialModel
+</span><span>        </span><span style="color:#96b5b4;">,</span><span> view = view
+</span><span>        </span><span style="color:#96b5b4;">,</span><span> update = update
+</span><span>        </span><span style="color:#96b5b4;">}
+</span></code></pre>
+<p>You can see the example in action <a href="https://ellie-app.com/tjSLxFccpFPa1">here</a>.</p>
+<p>Every piece is trivial by itself, and the combination reaches its peak of complexity in the <code>Browser.sandbox</code> call. That's the framework's entry point for defining an application: it basically just collects the three components and ties them up. The resulting code is clear and readable, although a bit verbose at times.</p>
+<blockquote>
+<p>One may take a look at Elm and argue that the functional approach is not so understandable in general, but counter-arguably that's only due its non conventional nature - as in it becomes clear once you get used to the paradigm.</p>
+</blockquote>
+<p>It's worth nothing how the button's click is connected to the incrementing action: the UI representation (<code>Html Msg</code>) depends on the <code>Msg</code> type, and the <code>button</code> element is assigned <code>Increment</code> as message to send on click. When such an event occurs the framework simply invokes <code>update</code> and updates the <code>Model</code> with the result.</p>
+<p>This approach solves the division of application and UI logic by denying the existence of the latter. UI is just a data structure here, there's no logic at all!</p>
+<blockquote>
+<p>Technically one may engage in some major tomfoolery by passing a function in lieu of the message (writing something like <code>button [onClick (\model -&gt; {model | counter = model.counter + 1})]</code>) and reduce <code>update</code> to just calling that same function when it is delivered. In a way this is like injecting logic back into a dry UI. There are some edge cases where it may be useful but I generally don't recommend it.</p>
+</blockquote>
+<p>Perhaps the most exotic aspect of an Elm application is how the UI is delivered. Instead of procedurally building a widget tree and updating the same widgets through some kind of reference according to the data, a new immutable description of the entire interface is returned.</p>
+<p>Isn't that inefficient? <a href="https://elm-lang.org/news/blazing-fast-html-round-two">Apparently not</a>.
+The catch is that the Elm runtime internally caches the DOM tree, diffs the new UI representation returned by <code>view</code> and only applies the required changes for maximum performance. This allows you to reap the benefits of a simplified, immutable approach without having to sacrifice performance.</p>
+<h2 id="great-tools-work-alike">Great Tools Work Alike</h2>
+<p>It is hopefully obvious just how different LVGL and Elm are. One is a low-level and heavily reliant on a mutating internal state; the other creates a high-level interface of immutable data and pure functions to strictly direct the application flow. Beyond their implementation and API however they share two characteristics of paramount importance:</p>
+<ol>
+<li>You don't need to know the internal details of the framework to use it. Implementation details and optimization strategies do not transpire from the API; while interesting in its own right, that information would only cause unnecessary friction - or worse, <em>confusion</em> - when using the library.</li>
+<li>The function and intent of every part of the framework is always crystal clear. There is rarely more than one obvious way to achieve the desired result.</li>
+</ol>
+<blockquote>
+<p>There are specific situations where delving deeper into implementation details is necessary, but such is the tradeoff when particular performance is required. For example, LVGL widgets can be disassembled and fine tuned for fast drawing, and the evaluation of Elm elements can be postponed if they are not displayed on the screen by enclosing them in lazy wrappers.</p>
+</blockquote>
+<p>These two principles make the learning process for both tools expedite and pleasant. Once the requirements are set, little time is wasted pondering how they can be realized by the code. The answer to any technical question is found quickly in the relevant documentation with no room for debate.</p>
+<p>This applies even when the framework doesn't provide an integrated route (I'm referring to LVGL especially). "Roll up your sleeves and do it yourself however you see fit" is still a direct and clear response.</p>
+<p>This is not just due to a extensive and well organized documentation (although it is another aspect that can be praised for both projects): the frameworks themselves are built in such a way that the flow of information and control is always crystal clear; you are never left guessing what's going on or how to achieve the basic steps, eliminating the risk of working against the tool instead of with it.</p>
+<p>To me, this should be the main requirement any library should strive to meet; yet, I'm about to complain extensively of an extremely popular framework that goes full speed in the opposite direction.</p>
+<h2 id="flutter">Flutter</h2>
+<p>Developing UIs is all sunshine and roses until the target platforms multiply like cockroaches.
+The search for one true solution for cross-platform application development has spawned a never ending undergrowth of tools that claim to succeed, but no approach is entirely satisfying.</p>
+<blockquote>
+<p>You can (almost) always compile whatever you are dealing with to a web page - Elm does that directly and even C can be compiled to webassembly with <code>emcc</code> - and then transform to a ""native"" application via a webview. That's what most of those cross-platform framework do under the hood anyway.</p>
+</blockquote>
+<p>The one that creates the most pleasant results for the least amount of headaches - in my experience at least - is Flutter.
+Backed by an active community (and a continous, significant investment from big G) Flutter makes targetting different platforms doable. I can reliably develop an application on my Linux development machine and then spend only a few days to deploy it everywhere else.</p>
+<p>While this remains a big reason to choose it in practice, my words of praise end here. The framework itself is, for the lack of a better work, a mess.
+To understand what's wrong with it, let's try to replicate the same counter example that we should know well by know.</p>
+<p>First things first, one should understand what kind of approach Flutter takes - which is where we encounter the first issues.</p>
+<p>Dart is a traditional imperative and object oriented programming language, so Flutter UIs are naturally costructed with widget objects similarly to LVGL.
+Unlike LVGL however their appearance is not directly controlled by the API; instead, every <code>Widget</code> must implement the <code>build</code> method, which should return a subtree that describes what is displayed on the screen.
+The basic building block for a UI in flutter is the <code>StatelessWidget</code>, a class that should be inherited to customize it. Being an object in an object-oriented programming language it can absolutely have a state, so what's with the name?</p>
+<p>Well, a <code>StatelessWidget</code> is not <em>supposed</em> to have a state because it wouldn't matter. Its build method is only called once when it's created, so it will ignore any future modification like incrementing a internal counter.</p>
+<p>To implement something remotely interesting we must turn to another class, the <code>StatefulWidget</code>. Ah, this one will surely allow me to keep track of an internal state and update the UI accordingly, right? Yes, but <em>not by itself</em>.</p>
+<p>I've beaten around the bush long enough; let's see some code:</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter/material.dart&#39;</span><span>;
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>  </span><span style="color:#8fa1b3;">runApp</span><span>(</span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">MaterialApp</span><span>(
+</span><span>    title: </span><span style="color:#a3be8c;">&#39;Flutter Demo&#39;</span><span>,
+</span><span>    home: </span><span style="color:#ebcb8b;">CounterWidget</span><span>(),
+</span><span>  ));
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterWidget </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CounterWidget</span><span>({</span><span style="color:#bf616a;">super</span><span>.key});
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">CounterState</span><span>();
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">CounterState</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">initState</span><span>() {
+</span><span>    </span><span style="color:#bf616a;">super</span><span>.</span><span style="color:#8fa1b3;">initState</span><span>();
+</span><span>    </span><span style="color:#bf616a;">this</span><span>.counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>        onPressed: () {
+</span><span>          </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.counter++;
+</span><span>          });
+</span><span>        },
+</span><span>        child: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>          </span><span style="color:#a3be8c;">&quot;You clicked ${</span><span style="color:#bf616a;">this.counter</span><span style="color:#a3be8c;">} times&quot;</span><span>,
+</span><span>        ),
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Despite the simplicity of the example, there is a lot to unpack here.</p>
+<h3 id="shaky-foundations">Shaky Foundations</h3>
+<p>Notice how I needed to create two separate classes in order to implement a counting widget: <code>CounterWidget</code> and <code>CounterState</code>. Looking at the names alone one may assume the former to describe the UI and the latter to encapsulate the data behind it; the code, however, tells a different story.</p>
+<p><code>CounterWidget</code> is nothing but boilerplate. It serves no particular function beside proclaming its existence and affiliation with <code>CounterState</code>. The latter on the other hand pulls all the weight, both keeping track of the <code>counter</code> and overriding <code>build</code>. There are two main issues with this approach:</p>
+<ol>
+<li>I had to declare two classes for a single custom widget. Worse of all, one of them carries no relevant information. That is quite a heavy burden for what's supposed to be the bread and butter for UI construction.</li>
+<li>The UI description is handled by the class called <code>State</code>, not the one with <code>Widget</code> in its name. It is a profoundly confusing design choice that will never not aggravate me (and honestly the main drive for this rant).</li>
+</ol>
+<blockquote>
+<p>Yes, I'm aware that code snippet generation is a thing. No, it doesn't solve the underlying issue: resulting code is still harder to read.</p>
+</blockquote>
+<p>Now let's take a look at how and where the framework handles refreshing the screen. You are not supposed to call <code>build</code> yourself, so it's not your direct responsibility as in LVGL. We had to create a different class specifically for the <code>State</code> part, so maybe the runtime will recognize when that changes like Elm does?</p>
+<p>Nope, nothing so simple. Subclassing <code>State</code> basically just give you access to the <code>setState</code> method: it is a somewhat peculiar function, one that takes an arbitrary closure as sole parameter.
+You are expected to use this anonymous function parameter to modify the state the UI depends on. When that happens <code>build</code> will be called again to update the screen.
+This sophisticated-sounding passage hints at some deeper mechanism where every mutation is carried on in a special context. I was convinced of that for the longest time, until I decided to unwrap the ridicolous hell that is state management in Flutter.</p>
+<p>It turns out that <code>setState</code> simply triggers a rebuild of the widget and that's it. The closure is called to ensure the mutation but nothing prevents it from happening before the function.
+I suppose this is an attempt at isolating mutation even when there is no reasonable path to enforce it. As it stands, it just creates an aura of mistery that ends up feeling silly.</p>
+<blockquote>
+<p>Yes, I realize I am nitpicking. I'll also use <code>setState</code> inappropriately from now on, out of spite.</p>
+</blockquote>
+<p>It is safe to say that the base is a little convoluted, but at least now we have a clearer picture. Flutter appears to take an hybrid approach: the UI is constructed declaratively thorught <code>build</code> methods and mutation is injected with manual <code>setState</code> invokation. In the end it's simple enough, right?</p>
+<p>Superficially, this assessment is more or less correct and it allows you to start developing with a certain degree of confidence. Eventually however you will start stumbling into weird behavious: UIs that don't update when they should, cryptic runtime errors, the data flow between application components becoming more and more viscous; overall a suffocating sense of confusion, where every solution brings even more questions into play.</p>
+<p>Let me show you a few examples of the horrors that lurk below the surface.</p>
+<h3 id="lost-in-dark-forests">Lost in Dark Forests</h3>
+<p>I have used a very precise word to explain how declarative frameworks like Elm and Flutter construct the UI: it is <em>described</em> by a widget tree returned by a function. Both frameworks take this description and apply a few computations in order to avoid unnecessary work before actually displaying anything on the screen.</p>
+<p>More specifically, <code>Widget</code>s are blueprints to produce a different type of tree: the <code>Element</code> tree. When a <code>Widget</code> needs to be displayed it creates an <code>Element</code> in its image; repeat the process for every <code>Widget</code> and you get a mirrored tree of objects. <code>Element</code>s mantain a reference to their creating <code>Widget</code>. Similarly to Elm, whenever a new <code>build</code> is invoked Flutter transverses the <code>Element</code> tree and for every node checks if something has changed in the corresponding <code>Widget</code>.compares these two trees and updates the latter to match the former.</p>
+<blockquote>
+<p>There is actually a third tree created by <code>Element</code>s, the <code>ObjectRenderer</code> tree. I never needed to learn how that works in order to work with Flutter, but I guess YMMV.</p>
+</blockquote>
+<p>Just like <code>Elm</code>, this process is in place for performance reasons. Comparing the two trees allows the framework to only apply the required changes, saving resources and computational effort.
+However, there is a huge flaw in this process. Unlike Elm, the <code>Widget</code> tree is more than a mere, immutable description of the UI: it is where your whole application lives. Widget may contain mutable fields, data and references that you need to keep track of. This becomes an issue because this tree is ephemeral, rebuilt on a whim when the backing state changes, potentially disrupting your plans.</p>
+<p>"Hey!" I hear you object. "That's the reason you are supposed to store state inside <code>State</code> subclasses!". Sure, let me dig a little bit deeper into this can of worms.</p>
+<p>As the kind fellow in the crowd pointed out, mutable state should be stored inside the <code>State</code> part of a <code>StatefulWidget</code>. Those object survive widget tree rebuilds because, despite having a <code>build</code> method, they are not <code>Widget</code>s.</p>
+<p>This is, once again, extremely confusing. What about separation of concerns? Why is the class that is supposed to handle the state also burdened with creating the UI?
+Logically, the <code>StatefulWidget</code> should have had a reference to the <code>State</code> while building its own subtree, leaving <code>State</code> to mind its data business. <code>setState</code> could stay where it is and act as notifier for the widget that the UI needs to be refreshed.</p>
+<blockquote>
+<p>This data-logic-alone version of <code>State</code> actually exists within Flutter: it's called <code>ChangeNotifier</code> (or <code>ValueNotifier</code>, or <code>Cubit</code> depending on the flavor) and it becomes the de facto standard to handle state once you go past the tutorial. It mostly renders <code>StatefulWidget</code> obsolete, highlighting the bad design at its core.</p>
+</blockquote>
+<p>But wait, it gets worse. Despite containing code that builds the UI, state objects aren't actually <code>Widget</code>s and they don't live under the corresponding tree; they are kept by <code>Element</code>s.
+To understand what difference it makes let's look at a variation of the previous example. Our counting application is gaining traction but some users would like to count multiple things with ordered (but flexible) priorities.</p>
+<p>We instantiate two different <code>CounterWidget</code>s and add a <code>String</code> label to them; then we keep the labels ordered by a parent <code>CounterListWidget</code> with the possibility to swap them with a button.</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">import </span><span style="color:#a3be8c;">&#39;package:flutter/material.dart&#39;</span><span>;
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">main</span><span>() {
+</span><span>  </span><span style="color:#8fa1b3;">runApp</span><span>(</span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">MaterialApp</span><span>(
+</span><span>    title: </span><span style="color:#a3be8c;">&#39;Flutter Demo&#39;</span><span>,
+</span><span>    home: </span><span style="color:#ebcb8b;">CounterListWidget</span><span>(),
+</span><span>  ));
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterListWidget </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CounterListWidget</span><span>({</span><span style="color:#bf616a;">super</span><span>.key});
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterListWidget</span><span>&gt; </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">CounterListState</span><span>();
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterListState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterListWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#ebcb8b;">List</span><span>&lt;</span><span style="color:#ebcb8b;">String</span><span>&gt; names = [</span><span style="color:#a3be8c;">&quot;Main&quot;</span><span>, </span><span style="color:#a3be8c;">&quot;Secondary&quot;</span><span>]; </span><span style="color:#65737e;">// Counter priorities
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">Column</span><span>(
+</span><span>        children: [
+</span><span>          </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">0</span><span>]),
+</span><span>          </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">1</span><span>]),
+</span><span>          </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>            onPressed: () {
+</span><span>                </span><span style="color:#65737e;">// Invert the current priorities
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">insert</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">removeAt</span><span>(</span><span style="color:#d08770;">0</span><span>));
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>            },
+</span><span>            child: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#a3be8c;">&quot;Swap&quot;</span><span>),
+</span><span>          ),
+</span><span>        ],
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterWidget </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> name;
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CounterWidget</span><span>({required </span><span style="color:#bf616a;">this</span><span>.name, </span><span style="color:#bf616a;">super</span><span>.key});
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">CounterState</span><span>();
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">CounterState</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">initState</span><span>() {
+</span><span>    </span><span style="color:#bf616a;">super</span><span>.</span><span style="color:#8fa1b3;">initState</span><span>();
+</span><span>    </span><span style="color:#bf616a;">this</span><span>.counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>        onPressed: () {
+</span><span>          </span><span style="color:#8fa1b3;">setState</span><span>(() {
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.counter++;
+</span><span>            </span><span style="color:#8fa1b3;">setState</span><span>(() { });
+</span><span>          });
+</span><span>        },
+</span><span>        child: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>          </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">this.widget.name</span><span style="color:#a3be8c;">} clicked ${</span><span style="color:#bf616a;">this.counter</span><span style="color:#a3be8c;">} times&#39;</span><span>,
+</span><span>        ),
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span><span>
+</span></code></pre>
+<p>It works as expected, but not for long.
+Notice how the name is retrieved by access the <code>CounterWidget</code> instance from <code>CounterState</code> through to the <code>widget</code> field.
+Say we want to be precise and keep the counter's name inside its <code>State</code> - it's data after all, and we don't like the additional indirection. Slightly modify <code>CounterState</code> to include a <code>name</code> field:</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterWidget </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> name;
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CounterWidget</span><span>({required </span><span style="color:#bf616a;">this</span><span>.name, </span><span style="color:#bf616a;">super</span><span>.key});
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">CounterState</span><span>(</span><span style="color:#bf616a;">this</span><span>.name); </span><span style="color:#65737e;">// Pass the name down (up?) to the state
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> name; </span><span style="color:#65737e;">// &lt;-- new name field
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">CounterState</span><span>(</span><span style="color:#bf616a;">this</span><span>.name);
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">initState</span><span>() {
+</span><span>    </span><span style="color:#bf616a;">super</span><span>.</span><span style="color:#8fa1b3;">initState</span><span>();
+</span><span>    </span><span style="color:#bf616a;">this</span><span>.counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>        onPressed: () {
+</span><span>          </span><span style="color:#bf616a;">this</span><span>.counter++;
+</span><span>          </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>        },
+</span><span>        child: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>          </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">this.name</span><span style="color:#a3be8c;">} clicked ${</span><span style="color:#bf616a;">this.counter</span><span style="color:#a3be8c;">} times&#39;</span><span>,
+</span><span>        ),
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Neat. Run it and see how the click event stops working. Why?</p>
+<p>I wish I could explain you in detail, but the truth is after spending far too many hours researching this topic I just gave up. In broad strokes, <code>setState</code> marks its <code>Widget</code> as dirty, triggering a rebuild. The framework then traverses the <code>Element</code> tree and for each node checks whether the corresponding <code>Widget</code> is of the same type it was before (i.e. <code>CounterWidget</code>); since it is, it only updates the <code>Widget</code> reference inside <code>Element</code>.
+When <code>name</code> is inside the <code>CounterState</code> the UI doesn't update properly because <code>Element</code> only updates the reference to the <code>Widget</code>, not the <code>State</code>. The <code>State</code> is then responsible for recreating the <code>Widget</code> and since it didn't update properly the result is identical to the previous frame.
+I still don't understand why the swap works when <code>CounterState</code> is not involved, probably something about <code>CounterWidget</code> getting recreated regardless.</p>
+<p>The issue can be circumvented by using an additional object. When searching for differences in a rebuild Flutter checks two things: the type and the <em>key</em> of the widgets. <code>Key</code>s can be explicitly attached to widgets that are tied in this stalemate to make the runtime able to distinguish them. If we add keys to <code>CounterWidget</code>s like so <code>CounterWidget(key: UniqueKey()</code> the demo works again, with the caveat that the state is reset every time we swap.</p>
+<p>While one may point out that <code>Elm</code>, <code>LVGL</code> or similar libraries are probably just as complicated in their inner mechanisms, they are safely hidden behind the API.
+In Flutter on the other hand you are explected to understand this massively convoluted process, lest not being able to debug day to day issues like the one I've just described.</p>
+<blockquote>
+<p>It's quite ironic for the framework that fails to properly hide its implementation to be the only one based on OOP.</p>
+</blockquote>
+<p>Figuring out why the UI is not updating after a state change and finding out where you should add a key or move a reference to fix it will drive you crazy; what's worse, problems like these can arise without making any conceptual mistake. In this example we simply moved part of the state where it belongs - the <code>State</code> object.</p>
+<p>The bigger problem, as I've already hinted, is the mixture between UI and state data structure at the framework level. You can't expect a <code>State</code> object to do its job properly when it's attached to screen elements.</p>
+<h3 id="widgets-widgets-everywhere">Widgets, Widgets Everywhere</h3>
+<p>One of the core tenets of Flutter is that "everything is a Widget".
+Despite having  just pointed out how giving UI components the responsibility to hold and manage state (and in genereal subordinating the latter to the former) yields terrible results, there are other aspects for which this approach is very appealing. It greatly simplifies building the UI because it does away with a lot of unnecessary clutter, mainly in the form of layout and styling languages. No longer is the project split between <code>xml</code>, <code>xaml</code>, <code>qml</code>, or even <code>css</code> stylesheets: just Dart all the way through.</p>
+<p>The development is much more linear as a result. The very act of creating a UI is extremely straightforward and logic and behaviour can be easily injected by virtue of callbacks.
+Layout is specified by composing widgets, mainly <code>Rows</code> and <code>Columns</code> (they have a few quirks but are very <strong>flex</strong>ible when wielded correctly); in the same way padding, margin and spacing (whatever the difference is) can all be specified by placing and nesting appropriate widgets.
+This also makes abstracting and parametrizing reusable pieces of the interface very natural. Let's try it a little bit: those two counters of the previous example are packet too tight; add a couple of <code>SizedBox</code> spacers:</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">Column</span><span>(
+</span><span>        children: [
+</span><span>          </span><span style="color:#ebcb8b;">Padding</span><span>(
+</span><span>              padding: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">EdgeInsets</span><span>.</span><span style="color:#8fa1b3;">all</span><span>(</span><span style="color:#d08770;">16</span><span>),
+</span><span>              child: </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">0</span><span>], key: </span><span style="color:#bf616a;">this</span><span>.key1)),
+</span><span>          </span><span style="color:#ebcb8b;">Padding</span><span>(
+</span><span>              padding: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">EdgeInsets</span><span>.</span><span style="color:#8fa1b3;">all</span><span>(</span><span style="color:#d08770;">16</span><span>),
+</span><span>              child: </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">1</span><span>], key: </span><span style="color:#bf616a;">this</span><span>.key2)),
+</span><span>          </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>            onPressed: () {
+</span><span>                </span><span style="color:#65737e;">// Invert the current priorities
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">insert</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">removeAt</span><span>(</span><span style="color:#d08770;">0</span><span>));
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>            },
+</span><span>            child: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#a3be8c;">&quot;Touch&quot;</span><span>),
+</span><span>          ),
+</span><span>        ],
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span></code></pre>
+<p>Slightly better, but the code is starting to repeat itself a bit. Nothing dramatic, it makes for a good exercise.
+Since the UI is just code we can easily fix it with a sprinkle of abstraction.</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">createPaddedCounter</span><span>(</span><span style="color:#ebcb8b;">String</span><span> name) =&gt; </span><span style="color:#ebcb8b;">Padding</span><span>(
+</span><span>          padding: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">EdgeInsets</span><span>.</span><span style="color:#8fa1b3;">all</span><span>(</span><span style="color:#d08770;">16</span><span>),
+</span><span>          child: </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: name),
+</span><span>        );
+</span><span>
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">Column</span><span>(
+</span><span>        children: [
+</span><span>          </span><span style="color:#8fa1b3;">createPaddedCounter</span><span>(</span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">0</span><span>]),
+</span><span>          </span><span style="color:#8fa1b3;">createPaddedCounter</span><span>(</span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">1</span><span>]),
+</span><span>          </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>            onPressed: () {
+</span><span>                </span><span style="color:#65737e;">// Invert the current priorities
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">insert</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">removeAt</span><span>(</span><span style="color:#d08770;">0</span><span>));
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>            },
+</span><span>            child: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#a3be8c;">&quot;Touch&quot;</span><span>),
+</span><span>          ),
+</span><span>        ],
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span></code></pre>
+<p>Very satisfying, isn't it? Unexpectedly, also wrong. I mean, it works, but according to Flutter etiquette you absolutely shouldn't do it.</p>
+<p>To clarify, this taboo is not focused on the act of abstracting out a repeating piece of the UI, but on the fact of using functions - you know, the base building block for abstraction - to do so. The proper path to follow would be to define an entirely new <code>Widget</code> class, like so:</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">PaddedCounterWidget </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatelessWidget</span><span> {
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> name;
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">PaddedCounterWidget</span><span>(</span><span style="color:#bf616a;">this</span><span>.name, {</span><span style="color:#bf616a;">super</span><span>.key});
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) =&gt; </span><span style="color:#ebcb8b;">Padding</span><span>(
+</span><span>        padding: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">EdgeInsets</span><span>.</span><span style="color:#8fa1b3;">all</span><span>(</span><span style="color:#d08770;">16</span><span>),
+</span><span>        child: </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.name),
+</span><span>      );
+</span><span>}
+</span><span>
+</span><span style="color:#65737e;">/* ... */
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">Column</span><span>(
+</span><span>        children: [
+</span><span>          </span><span style="color:#ebcb8b;">PaddedCounterWidget</span><span>(</span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">0</span><span>]),
+</span><span>          </span><span style="color:#ebcb8b;">PaddedCounterWidget</span><span>(</span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">1</span><span>]),
+</span><span>          </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>            onPressed: () {
+</span><span>                </span><span style="color:#65737e;">// Invert the current priorities
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">insert</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">removeAt</span><span>(</span><span style="color:#d08770;">0</span><span>));
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>            },
+</span><span>            child: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#a3be8c;">&quot;Touch&quot;</span><span>),
+</span><span>          ),
+</span><span>        ],
+</span><span>      ),
+</span><span>    );
+</span><span>  }
+</span></code></pre>
+<p>To me this is worse, although not unreasonably so. Functions are simply easier to use, require less code and in dart can be nested inside any block, all qualities that greatly improve code readability. I was quite surprised to learn that in Flutter <code>Widget</code>-returning functions are considered a code smell and went on to document myself on the matter; I encourage you to do the same by reading <a href="https://github.com/flutter/flutter/issues/19269">this lengthy github discussion about it</a>.</p>
+<p>Personally, I find the reasons behind it to be hazy and unsubstantial. The general idea is that Flutter works well with <code>Widget</code>s and functions - even when they return a <code>Widget</code> - break this flow.
+Perhaps by add a new <code>Widget</code> class we help the comparison algorithm to find changes in the UI (on account of it relying on the <code>Widget</code>'s type to spot differences), but apparently the <a href="https://github.com/flutter/flutter/issues/19269#issuecomment-490643024">performance aspect is negligible</a>.
+A new class also sticks out more clearly when inspecting the widget tree on the debugger, something I admittedly don't rely much upon. Still, when I need to abstract UI fragments it's usually just for code reuse, something that wouldn't warrant this kind of special attention.</p>
+<h3 id="static-typing-dynamic-errors">Static Typing, Dynamic Errors</h3>
+<p>Being purely functional and statically typed, Elm applications tipically enjoy a very small number of runtime bugs. On the other side of the ring we have LVGL, forced by C's scarce type system to handle every widget under the same <code>lv_obj_t *</code> pointer - with manually allocated memory, too! Keeping track of every widget's reference and type is an heavy responsibility, and segmentation faults are a daily occurence during development.</p>
+<p>Where is Flutter positioned in this scale? While still imperative, Dart sports an advanced static type system. This, paired with the fact that Flutter's <code>Widget</code> tree is costructed declaratively will surely reduce such problems to a minimum, right?</p>
+<blockquote>
+<p>Dart as a language is far, far away from solid type safety, but I don't want to hold the sins of the language over the framework. It has plenty of its own.</p>
+</blockquote>
+<p>Let's verify this claim with another example. Taking advatage of Flutter's cross platform nature we started distributing our successful counter app to different targets. Now users can count many things over multiple devices, but they'd like every counter to be synchronized. Once a cloud infrastracture is in place the application should be updated to report each increment request through the internet before modifying its own internal state.
+Network operations are a common place in mobile applications, and Dart's <code>async</code> capabilities are the perfect tool to implement interfaces that handle long-running background requests.</p>
+<p>For the sake of the example, we will emulate an HTTP request with a simple delayed future. Within <code>CounterState</code> we turn the <code>onPressed</code> callback into an <code>async</code> function and wait for the "network operation" to be over before acting on the local state:</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span>          </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>            onPressed: () </span><span style="color:#b48ead;">async</span><span> {
+</span><span>              </span><span style="color:#65737e;">// Report the increment event to the remote server
+</span><span>              </span><span style="color:#b48ead;">await </span><span style="color:#ebcb8b;">Future</span><span>.</span><span style="color:#8fa1b3;">delayed</span><span>(</span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Duration</span><span>(seconds: </span><span style="color:#d08770;">2</span><span>));
+</span><span>
+</span><span>              </span><span style="color:#bf616a;">this</span><span>.counter++;
+</span><span>              </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>            },
+</span><span>            child: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>              </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">this.name</span><span style="color:#a3be8c;">} clicked ${</span><span style="color:#bf616a;">this.counter</span><span style="color:#a3be8c;">} times&#39;</span><span>,
+</span><span>            ),
+</span><span>          ),
+</span></code></pre>
+<p>That was fairly easy, but the delay between a button click and the update is making the UI feel sluggish. A user may tap the counter repeatedly thinking it's stuck, firing multiple unintended events instead. Since the internet connection can be arbitrarily slow we should show that work is happening in the background with a loading indicator. We add a <code>loading</code> flag to <code>CounterState</code> and update the <code>build</code> method accordingly:</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>  </span><span style="color:#ebcb8b;">bool</span><span> loading = </span><span style="color:#d08770;">false</span><span>; </span><span style="color:#65737e;">// Network operation flag
+</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">CounterState</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#bf616a;">this</span><span>.loading 
+</span><span>          ? </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CircularProgressIndicator</span><span>() </span><span style="color:#65737e;">// When loading show a circular spinner
+</span><span>          : </span><span style="color:#ebcb8b;">ElevatedButton</span><span>( </span><span style="color:#65737e;">// Otherwise continue with the normal UI
+</span><span>              onPressed: () </span><span style="color:#b48ead;">async</span><span> {
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.loading = </span><span style="color:#d08770;">true</span><span>; </span><span style="color:#65737e;">// Set the loading flag
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>
+</span><span>                </span><span style="color:#b48ead;">await </span><span style="color:#ebcb8b;">Future</span><span>.</span><span style="color:#8fa1b3;">delayed</span><span>(</span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Duration</span><span>(seconds: </span><span style="color:#d08770;">2</span><span>));
+</span><span>
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.loading = </span><span style="color:#d08770;">false</span><span>; </span><span style="color:#65737e;">// Clear the loading flag 
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.counter++;       </span><span style="color:#65737e;">// and update the state
+</span><span>                </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>              },
+</span><span>              child: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>                </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">this.name</span><span style="color:#a3be8c;">} clicked ${</span><span style="color:#bf616a;">this.counter</span><span style="color:#a3be8c;">} times&#39;</span><span>,
+</span><span>              ),
+</span><span>            ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>Grand. But wait, there's a bug report! Swapping the two counters while a network request is in progress leaves the client in an inconsistent state with the server. Pending remote operations should disable all buttons, not just the specific counter's.
+The solution is to move <code>loading</code> from <code>CounterState</code> to <code>CounterListState</code> and pass a reference of the latter to the former so the <code>onPressed</code> event can still modify it.</p>
+<pre data-lang="dart" style="background-color:#2b303b;color:#c0c5ce;" class="language-dart "><code class="language-dart" data-lang="dart"><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterListState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterListWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#ebcb8b;">List</span><span>&lt;</span><span style="color:#ebcb8b;">String</span><span>&gt; names = [</span><span style="color:#a3be8c;">&quot;Main&quot;</span><span>, </span><span style="color:#a3be8c;">&quot;Secondary&quot;</span><span>];
+</span><span>  </span><span style="color:#ebcb8b;">bool</span><span> loading = </span><span style="color:#d08770;">false</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">initState</span><span>() {
+</span><span>    </span><span style="color:#bf616a;">super</span><span>.</span><span style="color:#8fa1b3;">initState</span><span>();
+</span><span>  }
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#bf616a;">this</span><span>.loading
+</span><span>          </span><span style="color:#65737e;">// Replace the whole page with a progress bar when loading
+</span><span>          ? </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CircularProgressIndicator</span><span>()
+</span><span>          : </span><span style="color:#ebcb8b;">Column</span><span>(
+</span><span>              children: [
+</span><span>                </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">0</span><span>], state: </span><span style="color:#bf616a;">this</span><span>), </span><span style="color:#65737e;">// Pass a reference to the upper state to the lower widgets
+</span><span>                </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">SizedBox</span><span>(height: </span><span style="color:#d08770;">16</span><span>),
+</span><span>                </span><span style="color:#ebcb8b;">CounterWidget</span><span>(name: </span><span style="color:#bf616a;">this</span><span>.names[</span><span style="color:#d08770;">1</span><span>], state: </span><span style="color:#bf616a;">this</span><span>),
+</span><span>                </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">SizedBox</span><span>(height: </span><span style="color:#d08770;">16</span><span>),
+</span><span>                </span><span style="color:#ebcb8b;">ElevatedButton</span><span>(
+</span><span>                  onPressed: () {
+</span><span>                    </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">insert</span><span>(</span><span style="color:#d08770;">1</span><span>, </span><span style="color:#bf616a;">this</span><span>.names.</span><span style="color:#8fa1b3;">removeAt</span><span>(</span><span style="color:#d08770;">0</span><span>));
+</span><span>                    </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>                  },
+</span><span>                  child: </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Text</span><span>(</span><span style="color:#a3be8c;">&quot;Touch&quot;</span><span>),
+</span><span>                ),
+</span><span>              ],
+</span><span>            ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterWidget </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">StatefulWidget</span><span> {
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">String</span><span> name;
+</span><span>  </span><span style="color:#b48ead;">final </span><span style="color:#ebcb8b;">CounterListState</span><span> state;
+</span><span>  </span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">CounterWidget</span><span>({required </span><span style="color:#bf616a;">this</span><span>.name, required </span><span style="color:#bf616a;">this</span><span>.state, </span><span style="color:#bf616a;">super</span><span>.key});
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; </span><span style="color:#8fa1b3;">createState</span><span>() =&gt; </span><span style="color:#ebcb8b;">CounterState</span><span>(</span><span style="color:#bf616a;">this</span><span>.name);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">class </span><span style="color:#ebcb8b;">CounterState </span><span style="color:#b48ead;">extends </span><span style="color:#ebcb8b;">State</span><span>&lt;</span><span style="color:#ebcb8b;">CounterWidget</span><span>&gt; {
+</span><span>  </span><span style="color:#ebcb8b;">int</span><span> counter = </span><span style="color:#d08770;">0</span><span>;
+</span><span>
+</span><span>  </span><span style="color:#ebcb8b;">CounterState</span><span>();
+</span><span>
+</span><span>  </span><span style="color:#b48ead;">@override
+</span><span>  </span><span style="color:#ebcb8b;">Widget </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#ebcb8b;">BuildContext</span><span> context) {
+</span><span>    </span><span style="color:#b48ead;">return </span><span style="color:#ebcb8b;">Center</span><span>(
+</span><span>      child: </span><span style="color:#ebcb8b;">ElevatedButton</span><span>( 
+</span><span>          onPressed: () </span><span style="color:#b48ead;">async</span><span> {
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.widget.state.loading = </span><span style="color:#d08770;">true</span><span>; </span><span style="color:#65737e;">// Set the loading flag (in the upper state)
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.widget.state.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>
+</span><span>            </span><span style="color:#b48ead;">await </span><span style="color:#ebcb8b;">Future</span><span>.</span><span style="color:#8fa1b3;">delayed</span><span>(</span><span style="color:#b48ead;">const </span><span style="color:#ebcb8b;">Duration</span><span>(seconds: </span><span style="color:#d08770;">2</span><span>));
+</span><span>
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.widget.state.loading = </span><span style="color:#d08770;">false</span><span>; </span><span style="color:#65737e;">// Clear the loading flag 
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.widget.state.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.counter++;       </span><span style="color:#65737e;">// and update the state
+</span><span>            </span><span style="color:#bf616a;">this</span><span>.</span><span style="color:#8fa1b3;">setState</span><span>(() {});
+</span><span>          },
+</span><span>          child: </span><span style="color:#ebcb8b;">Text</span><span>(
+</span><span>            </span><span style="color:#a3be8c;">&#39;${</span><span style="color:#bf616a;">this.name</span><span style="color:#a3be8c;">} clicked ${</span><span style="color:#bf616a;">this.counter</span><span style="color:#a3be8c;">} times&#39;</span><span>,
+</span><span>          ),
+</span><span>        ),
+</span><span>    );
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>This should display a spinner instead of the whole UI when a request is pending and restore everything once it's finished. If you run it however you will be greeted by a <em>totally clear and immediately understandable error</em>:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>[ERROR:flutter/runtime/dart_vm_initializer.cc(41)] Unhandled Exception: setState() called after dispose(): CounterState#a957f(lifecycle state: defunct, not mounted)
+</span><span>This error happens if you call setState() on a State object for a widget that no longer appears in the widget tree (e.g., whose parent widget no longer includes the widget in its build). This error can occur when code calls setState() fr
+</span><span>om a timer or an animation callback.
+</span><span>The preferred solution is to cancel the timer or stop listening to the animation in the dispose() callback. Another solution is to check the &quot;mounted&quot; property of this object before calling setState() to ensure the object is still in the
+</span><span> tree.
+</span><span>This error might indicate a memory leak if setState() is being called because another object is retaining a reference to this State object after it has been removed from the tree. To avoid memory leaks, consider breaking the reference to
+</span><span> this object during dispose().
+</span><span>#0      State.setState.&lt;anonymous closure&gt; (package:flutter/src/widgets/framework.dart:1167:9)
+</span><span>#1      State.setState (package:flutter/src/widgets/framework.dart:1202:6)
+</span><span>#2      CounterState.build.&lt;anonymous closure&gt; (package:flutter_experiments/main.dart:99:22)
+</span></code></pre>
+<p>I'll spare you the decryption effort: after setting <code>this.widget.state.loading = true</code>, <code>CounterState</code>'s <code>onPressed</code> is suspended at the <code>await</code> point until the "network request" is over. At that moment a tree rebuild is started because <code>setState</code> has marked <code>CounterListState</code> as dirty. <code>CounterListWidget</code> is recreated, this time only showing <code>CircularProgressIndicator</code>; this means that there are no more <code>CounterWidget</code>s and their corresponding <code>CounterState</code>s are disposed of. However, our future is still waiting in the background, ready to resume execution: when it finally accesses <code>this</code> it finds that the object doesn't exist anymore and everything blows up.</p>
+<p>This error is not at all dissimilar from a good ol' C segmentation fault, as it stems from a pointer access for memory that has been deleted.
+As I've mentioned it's a common occurrence in imperative frameworks like LVGL, while higher level languages like Elm eliminate the issue by automatically managing entities. Once again, Flutter positions itself in a nonsensical middle ground, somehow managing to get all (and more) of the downsides without any of the benefits of either approach. The main problem is that the developer has no control over the lifecycle of the objects but is still supposed to know all about it to avoid mundane mistakes like this.</p>
+<p>Now, while the principle of having all the responsibility with none of the agency is objectively terrible, the practical reality may seem not seem so: in this case it's not hard to see how setting <code>loading = true</code> eventually destroys the object we are working with halfway through the future. Situations like this however are quite frequent, and not limited to <code>State</code>s. Everything whose lifecycle depends on the <code>Widget</code> tree is subject to the same issue (<code>BuildContext</code> is a prime example). The emergence of such bugs can also depend on, timing, interaction and other factors - as runtime errors often do - making them hard to debug.</p>
+<blockquote>
+<p>I just wonder how much this hellscape of references, trees, objects creating and updating each other is really so instrumental to performace and how much could be cleaned up with a better architecture.</p>
+</blockquote>
+<h3 id="sophisticated-state-management">Sophisticated State Management</h3>
+<p>This last example highlighted another massive problem with Flutter: state management. <code>StatefulWidget</code>s are meant to</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This "three way comparison" has finally turned into a full blown, unapologetic rant about Flutter. That's my bad. I still believe that the analogies with two lesser known UI frameworks were helpful in highlighting its shortcomings.</p>
+<p>What's the takeway here? Not much, I'm afraid. Flutter doesn't need to abide to good design in order to be used, because it will always be the most funded cross-platform framework out there. It doesn't matter how inconsistent and unintuitive its API is; in the end, if it gets you to a working application with the least amount of time and resources it will trump on every other competitor with ease.</p>
+<p>This unfortunately applies to me first and foremost; alas, I wouldn't be complaining so much about a tool if I could simply replace it with a better one.<br />
+I just hope the next tech-giant-sponsored project tries a little bit harder to start from solid foundations.</p>
+<p><img src="https://maldus512.github.io/articles/flutter-elm-lvgl/oldmanyellsatcloud.jpg" alt="old me yells at Flutter" /></p>
+
+        </div>
+    </div>
+</div>
+
+<div style="position:fixed; left:0px; bottom:0px; z-index:1; width:100%;">
+  <div style="height: 6px;" class="dark-secondary-bg">
+    <div id="scroll-indicator-bar" class="dark-scrollbar" style="height: 100%; width:0%;"></div>
+  </div>
+</div>
+
+
+            </div>
+        </div>
+    </div>
+    <script src="/js/base.js"></script>
+</body>
+
+</html>
